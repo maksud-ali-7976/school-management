@@ -34,6 +34,6 @@ router.get(
   HandlerForTeacherEditInformation
 );
 
-router.delete("/teacher-deleted", AuthMiddleware, HandlerForDeleteTeacher);
-
+router.delete("/teacher-delete/:id", AuthMiddleware, HandlerForDeleteTeacher);
+router.patch("/teacher-update/:id",AuthMiddleware);
 export default router;
