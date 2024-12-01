@@ -1,7 +1,10 @@
 import "dotenv/config";
+import path from "path";
+import { fileURLToPath } from "url";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 import express from "express";
 import cors from "cors";
-import path from "path";
 const app = express();
 import UserRoutes from "./routes/user.js";
 import StudentsRoute from "./routes/Students.js";
@@ -23,7 +26,8 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(express.static(path.resolve("public")));
+app.use("/uploads", express.static(path.join(__dirname, "public/upload")));
+app.use("/teachers", express.static(path.join(__dirname, "public/teacher")));
 const PORT = process.env.PORT;
 
 app.use("/user", UserRoutes);

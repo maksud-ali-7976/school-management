@@ -2,22 +2,23 @@ import { Teacher } from "../models/teachermodel.js";
 
 export async function HandlerForTeacherAdd(req, res) {
   try {
-    const profile = req.file;
+    const profile = `http://localhost:5000/teachers/${req.file.filename}`;
     const { teacherName, salary, address, mobile, subject } = JSON.parse(
       req.body.data
     );
-    const teacher = Teacher.findOne(teacherName);
-    if (teacher === null) {
-      const teacherData = Teacher.create({
+    const teacher = await Teacher.findOne({ teacherName });
+    if (teacher == null) {
+      const teacherData = await Teacher.create({
         teacherName,
         salary,
         mobile,
         subject,
         address,
+        profile,
       });
       return res
         .status(200)
-        .json({ success: false, message: "Teacher Added Successfully" });
+        .json({ success: true, message: "Teacher Added Successfully" });
     } else {
       return res.json({ success: false, message: "Teacher Already exists" });
     }
@@ -28,7 +29,7 @@ export async function HandlerForTeacherAdd(req, res) {
 
 export async function HandlerForGettingAllTeacher(req, res) {
   try {
-    const allTeacher = Teacher.find();
+    const allTeacher = await Teacher.find();
     if (allTeacher) {
       return res.status(200).json({
         success: true,

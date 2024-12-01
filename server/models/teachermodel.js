@@ -25,6 +25,9 @@ const teacherSchema = new Schema(
     subject: {
       type: String,
     },
+    profile:{
+      type:String
+    }
   },
   { timestamps: true }
 );

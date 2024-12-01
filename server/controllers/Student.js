@@ -2,7 +2,7 @@ import Students from "../models/students.js";
 
 export async function HandlerForStudentAdmission(req, res) {
   try {
-    const profile = req.file.filename;
+    const profile = `http://localhost:5000/uploads/${req.file.filename}`;
     const {
       studentName,
       studentFather,
