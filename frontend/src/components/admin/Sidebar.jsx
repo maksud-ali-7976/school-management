@@ -12,16 +12,7 @@ function Sidebar() {
   const [sideBar, setSideBar] = useState(true);
   const navigate = useNavigate();
   const dispatch = useDispatch();
- 
-  const HandlerLogout = async () => {
-    alert("hii i am calling")
-    // const response = await axios.get("http://localhost:5000/user/logout", {
-    //   withCredentials: true,
-    // });
-    // console.log(response.data)
-    // dispatch(AuthLogout());
-    // navigate('/admin/login')
-  };
+
   return (
     <>
       {sideBar ? (
@@ -56,7 +47,7 @@ function Sidebar() {
                 <div key={i}>
                   <div
                     className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 "
-                     onClick={()=> navigate(data.path)}
+                    onClick={() => navigate(data.path)}
                   >
                     <i className="bi bi-house-door-fill">{data.logo}</i>
                     <span className="text-[15px] ml-4 font-bold">
@@ -66,11 +57,6 @@ function Sidebar() {
                 </div>
               );
             })}
-
-            <div className="p-2.5 mt-3 flex items-center  rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-black">
-              <i className="bi bi-box-arrow-in-right" />
-              <button className="text-[15px] ml-4 font-bold" onClick={()=>HandlerLogout()}>Logout</button>
-            </div>
           </div>
         </>
       ) : (

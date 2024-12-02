@@ -7,6 +7,7 @@ import {
   HandlerForGettingAllTeacher,
   HandlerForTeacherEditInformation,
   HandlerForDeleteTeacher,
+  HandlerFroTeachersUpdate,
 } from "../controllers/Teachers.js";
 
 const storage = multer.diskStorage({
@@ -35,5 +36,5 @@ router.get(
 );
 
 router.delete("/teacher-delete/:id", AuthMiddleware, HandlerForDeleteTeacher);
-router.patch("/teacher-update/:id",AuthMiddleware);
+router.patch("/teacher-update/:id", AuthMiddleware, HandlerFroTeachersUpdate);
 export default router;

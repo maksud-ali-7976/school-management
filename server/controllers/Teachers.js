@@ -69,3 +69,24 @@ export async function HandlerForDeleteTeacher(req, res) {
     return res.json({ success: false, message: error });
   }
 }
+
+export async function HandlerFroTeachersUpdate(req, res) {
+  try {
+    const id = req.params.id;
+    const { teacherName, address, salary, subject, mobile } = req.body;
+    const teachers = await Teacher.findByIdAndUpdate(id, {
+      $set: {
+        teacherName: teacherName,
+        subject: subject,
+        mobile: mobile,
+        salary: salary,
+        address: address,
+      },
+    });
+    return res
+      .status(200)
+      .json({ success: true, message: "teacher updated success" });
+  } catch (error) {
+    return res.status(400).json({ success: false, message: "error happened" });
+  }
+}

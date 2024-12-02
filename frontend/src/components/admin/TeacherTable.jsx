@@ -1,46 +1,49 @@
-import axios from "axios";
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-const API_URL = import.meta.env.VITE_BACKEND_API;
-const Table = ({ Data, columns }) => {
+import axios from "axios";
+import { replace, useNavigate } from "react-router-dom";
+const TeacherTable = ({ Data, columns }) => {
+  const API_URL = import.meta.env.VITE_BACKEND_API;
   const navigate = useNavigate();
   const [editToggle, setEditToggle] = useState(false);
-  const [editStudentData, setEditStudentData] = useState({
-    studentName: "",
-    studentFather: "",
-    studentMother: "",
-    totalFess: "",
+  const [editTeacherData, setEditTeachersData] = useState({
+    teacherName: "",
+    mobile: "",
+    salary: "",
+    subject: "",
     address: "",
-    phone: "",
   });
-  const HandlerForStudentDelete = async (id) => {
+
+  const teacherDelete = async (id) => {
     const response = await axios.delete(
-      `${API_URL}student/delete-student/${id}`,
-      {
-        withCredentials: true,
-      }
+      `${API_URL}teacher/teacher-delete/${id}`,
+      { withCredentials: true }
     );
-    navigate("/students", { replace: true });
+    navigate("/teachers", { replace: true });
     window.location.reload();
+    return response.data;
   };
   const editHandler = async (id) => {
-    const response = await axios.get(`${API_URL}student/student/${id}`, {
+    const response = await axios.get(`${API_URL}teacher/edit-teacher/${id}`, {
       withCredentials: true,
     });
-    setEditStudentData(response.data.data);
+
+    setEditTeachersData(response.data.data);
   };
-  const HandlerForUpdate = async (e) => {
-    e.preventDefault();
-    const response = await axios.patch(
-      `${API_URL}student/update-student/${editStudentData._id}
-    `,
-      editStudentData,
-      {
-        withCredentials: true,
-      }
-    );
-    navigate("/students", { replace: true });
-    window.location.reload();
+  const updateHandler = async (e) => {
+    try {
+      e.preventDefault();
+      const response = await axios.patch(
+        `${API_URL}teacher/teacher-update/${editTeacherData._id}`,
+        editTeacherData,
+        {
+          withCredentials: true,
+        }
+      );
+     navigate('/teachers',{replace:true})
+     window.location.reload()
+    } catch (error) {
+      throw error;
+    }
   };
   return (
     <>
@@ -54,7 +57,6 @@ const Table = ({ Data, columns }) => {
                 </th>
               );
             })}
-            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -65,19 +67,17 @@ const Table = ({ Data, columns }) => {
                   <img
                     className="w-10 h-10 rounded-full"
                     src={el.profile}
-                    alt=" image"
+                    alt="Jese image"
                   />
                   <div className="pl-3">
                     <div className="text-base font-semibold">
-                      {el.studentName}
+                      {el.teacherName}
                     </div>
                   </div>
                 </td>
-                <td className="px-6 py-4">{el.studentFather}</td>
-                <td className="px-6 py-4">{el.studentMother}</td>
-                <td className="px-6 py-4">{el.totalFess}</td>
+                <td className="px-6 py-4">{el.mobile}</td>
                 <td className="px-6 py-4">{el.address}</td>
-                <td className="px-6 py-4">{el.phone}</td>
+                <td className="px-6 py-4">{el.salary}</td>
                 <td className="px-6 py-4">
                   <div className="flex items-center">
                     <span
@@ -88,6 +88,7 @@ const Table = ({ Data, columns }) => {
                     {el.feesStatus ? "Paid" : "Due"}
                   </div>
                 </td>
+                <td className="px-6 py-4">{el.subject}</td>
                 <td>
                   <button
                     className="w-[40%] bg-blue-500 h-5 text-black rounded-md"
@@ -97,7 +98,7 @@ const Table = ({ Data, columns }) => {
                   </button>
                   <button
                     className="w-[40%] bg-red-500 h-5 text-black rounded-md"
-                    onClick={(e) => HandlerForStudentDelete(el._id)}
+                    onClick={(e) => teacherDelete(el._id)}
                   >
                     Delete
                   </button>
@@ -113,25 +114,25 @@ const Table = ({ Data, columns }) => {
           <div className="fixed inset-0 bg-[rgba(0,0,0,0.3)] flex items-center justify-center z-50">
             <section className=" p-6 mx-auto bg-white rounded-md shadow-md dark:bg-gray-800 mt-10">
               <h2 className="text-lg font-semibold  text-gray-700 capitalize dark:text-white">
-                Student Record Update
+                Teacher Record Update
               </h2>
-              <form onSubmit={HandlerForUpdate}>
+              <form onSubmit={updateHandler}>
                 <div className="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
                   <div>
                     <label
                       className="text-gray-700 dark:text-gray-200"
                       htmlFor="username"
                     >
-                      studentName
+                      TeacherName
                     </label>
                     <input
                       id="username"
                       type="text"
-                      value={editStudentData.studentName || ""}
+                      value={editTeacherData.teacherName || ""}
                       onChange={(e) =>
-                        setEditStudentData({
-                          ...editStudentData,
-                          studentName: e.target.value,
+                        setEditTeachersData({
+                          ...editTeacherData,
+                          teacherName: t.target.value,
                         })
                       }
                       className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
@@ -142,16 +143,16 @@ const Table = ({ Data, columns }) => {
                       className="text-gray-700 dark:text-gray-200"
                       htmlFor="emailAddress"
                     >
-                      fatherName
+                      Address
                     </label>
                     <input
                       id="emailAddress"
                       type="text"
-                      value={editStudentData.studentFather || ""}
+                      value={editTeacherData.address || ""}
                       onChange={(e) =>
-                        setEditStudentData({
-                          ...editStudentData,
-                          studentFather: e.target.value,
+                        setEditTeachersData({
+                          ...editTeacherData,
+                          address: e.target.value,
                         })
                       }
                       className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
@@ -162,16 +163,16 @@ const Table = ({ Data, columns }) => {
                       className="text-gray-700 dark:text-gray-200"
                       htmlFor="password"
                     >
-                      motherName
+                      Mobile Number
                     </label>
                     <input
-                      id="password"
+                      id="mobile"
                       type="text"
-                      value={editStudentData.studentMother || ""}
+                      value={editTeacherData.mobile || ""}
                       onChange={(e) =>
-                        setEditStudentData({
-                          ...editStudentData,
-                          studentMother: e.target.value,
+                        setEditTeachersData({
+                          ...editTeacherData,
+                          mobile: e.target.value,
                         })
                       }
                       className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
@@ -183,16 +184,16 @@ const Table = ({ Data, columns }) => {
                       className="text-gray-700 dark:text-gray-200"
                       htmlFor="passwordConfirmation"
                     >
-                      totalFees
+                      Salary
                     </label>
                     <input
-                      id="totalFess"
+                      id="salary"
                       type="text"
-                      value={editStudentData.totalFess || ""}
+                      value={editTeacherData.salary || ""}
                       onChange={(e) =>
-                        setEditStudentData({
-                          ...editStudentData,
-                          totalFess: e.target.value,
+                        setEditTeachersData({
+                          ...editTeacherData,
+                          salary: e.target.value,
                         })
                       }
                       className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
@@ -203,36 +204,16 @@ const Table = ({ Data, columns }) => {
                       className="text-gray-700 dark:text-gray-200"
                       htmlFor="passwordConfirmation"
                     >
-                      Address
+                      Subject
                     </label>
                     <input
-                      id="address"
+                      id="subject"
                       type="text"
-                      value={editStudentData.address || ""}
+                      value={editTeacherData.subject || ""}
                       onChange={(e) =>
-                        setEditStudentData({
-                          ...editStudentData,
-                          address: e.target.value,
-                        })
-                      }
-                      className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
-                    />
-                  </div>
-                  <div>
-                    <label
-                      className="text-gray-700 dark:text-gray-200"
-                      htmlFor="passwordConfirmation"
-                    >
-                      mobile Number
-                    </label>
-                    <input
-                      id="number"
-                      type="number"
-                      value={editStudentData.phone || ""}
-                      onChange={(e) =>
-                        setEditStudentData({
-                          ...editStudentData,
-                          phone: e.target.value,
+                        setEditTeachersData({
+                          ...editTeacherData,
+                          subject: e.target.value,
                         })
                       }
                       className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
@@ -259,4 +240,4 @@ const Table = ({ Data, columns }) => {
   );
 };
 
-export default Table;
+export default TeacherTable;

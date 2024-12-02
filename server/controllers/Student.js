@@ -77,7 +77,6 @@ export async function HandlerForStudentDeleted(req, res) {
 }
 export async function HandlerForUpdatingStudentInformation(req, res) {
   const id = req.params.id;
-  console.log(id)
   const { studentName, studentFather, studentMother, totalFess, address, phone } = req.body;
   await Students.findByIdAndUpdate(id, {
     $set: {

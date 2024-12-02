@@ -38,8 +38,15 @@ export async function HandlerForUserLogin(req, res) {
           { email: user.email, id: user._id },
           process.env.JWT_SECRET
         );
-          // console.log(token)
-        res.cookie("token", token).json({
+        // console.log(token)
+        res.cookie("token", token, {
+          httpOnly: true, // Makes cookie inaccessible to client-side JS
+          secure: process.env.NODE_ENV === "production", // Ensure HTTPS in production
+          sameSite: "Strict", // Prevent CSRF attacks
+          maxAge: 24 * 60 * 60 * 1000, // 1 day expiration
+        });
+
+        res.json({
           success: true,
           message: "user login successfully",
           token: token,
@@ -73,5 +80,11 @@ export async function HandlerForCheckUserAuth(req, res) {
 }
 
 export async function HandlerForUserLogout(req, res) {
-  return res.clearCookie("token");
+  res.clearCookie("token", {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "Strict",
+    path: "/",
+  });
+  return res.json({ success: true, message: "user logout success" });
 }

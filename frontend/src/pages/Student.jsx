@@ -1,12 +1,18 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { replace, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Table from "../components/admin/Table";
-
+import { useDispatch, useSelector } from "react-redux";
+import { studentDataFetch } from "../toolkit/DataReducer";
 const Student = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(studentDataFetch());
+  });
+  const API_URL = import.meta.env.VITE_BACKEND_API;
   const navigate = useNavigate();
   const formData = new FormData();
-  const [studentRecords, setStudentRecords] = useState(null);
+  const students = useSelector((state) => state.data.students);
   const [StudentToggle, setStudentToggle] = useState(false);
   const [StudentData, setStudentData] = useState({
     studentName: "",
@@ -25,7 +31,7 @@ const Student = () => {
     formData.append("data", JSON.stringify(StudentData));
 
     const response = await axios.post(
-      "http://localhost:5000/student/add-student",
+      `${API_URL}student/add-student`,
       formData,
       {
         headers: {
@@ -39,22 +45,7 @@ const Student = () => {
     window.location.reload();
     setStudentToggle(false);
   };
-  useEffect(() => {
-    async function fetchData() {
-      const response = await axios.get(
-        "http://localhost:5000/student/all-student",
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-          withCredentials: true, // Include cookies
-        }
-      );
-
-      setStudentRecords(response.data.result);
-    }
-    fetchData();
-  }, []);
+  useEffect(() => {}, []);
 
   return (
     <>
@@ -191,7 +182,7 @@ const Student = () => {
 
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg mt-4">
           <Table
-            Data={studentRecords}
+            Data={students}
             columns={[
               { key: "name", label: "studentName" },
               { key: "father", label: "fatherName" },
@@ -199,7 +190,7 @@ const Student = () => {
               { key: "totalFess", label: "totalFess" },
               { key: "address", label: "Address" },
               { key: "phone", label: "Phone" },
-              {key:'feesStatus',label:"fessStatus"}
+              { key: "feesStatus", label: "fessStatus" },
             ]}
           />
         </div>

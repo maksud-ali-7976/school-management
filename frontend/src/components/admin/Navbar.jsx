@@ -1,9 +1,16 @@
-import React, { useState }  from "react";
+import React, { useState } from "react";
 import { AiFillProfile } from "react-icons/ai";
-
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 const Navbar = () => {
   const [UserMenuTOggle, setUserToggleMenu] = useState(false);
- 
+  const navigate = useNavigate();
+  const logoutHandler = async () => {
+    const response = await axios.post("http://localhost:5000/user/logout", {
+      withCredentials: true,
+    });
+    console.log(response.data)
+  };
   return (
     <div className="border">
       <nav className="bg-gray-800">
@@ -146,11 +153,10 @@ const Navbar = () => {
                         Settings
                       </a>
                       <button
-                       
                         className="block px-4 py-2 text-sm text-gray-700"
                         role="menuitem"
                         tabIndex={-1}
-                     
+                        onClick={(e) => logoutHandler()}
                       >
                         Sign out
                       </button>
