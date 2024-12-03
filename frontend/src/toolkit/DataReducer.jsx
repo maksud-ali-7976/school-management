@@ -16,14 +16,14 @@ export const studentDataFetch = createAsyncThunk(
 
 export const teachersData = createAsyncThunk("data/teachersFetch", async () => {
   const response = await axios.get(
-    "http://localhost:5000/teacher/all-teacher",
+    `${API_URL}teacher/all-teacher`,
     { withCredentials: true }
   );
   return response.data;
 });
 
 export const driversFetch = createAsyncThunk("data/driversFetch", async () => {
-  const response = await axios.get("http://localhost:5000/driver/all-driver", {
+  const response = await axios.get(`${API_URL}driver/all-driver`, {
     withCredentials: true,
   });
 

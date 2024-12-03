@@ -2,6 +2,7 @@ import axios from "axios";
 import React from "react";
 import { useState } from "react";
 import {useNavigate} from 'react-router-dom'
+const API_URL = import.meta.env.VITE_BACKEND_API;
 const Register = () => {
   const navigate = useNavigate();
   const [userInfo, setUserInfo] = useState({
@@ -13,7 +14,7 @@ const Register = () => {
   const SubmitHandler = async (e) => {
     e.preventDefault();
     const response = await axios.post(
-      "http://localhost:5000/user/register",
+      `${API_URL}user/register`,
       userInfo
     );
     console.log(response.data);

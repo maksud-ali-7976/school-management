@@ -2,12 +2,13 @@ import React, { useEffect, useState } from "react";
 import TeacherTable from "../components/admin/TeacherTable";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import {teachersData} from '../toolkit/DataReducer';
-import {useDispatch,useSelector} from 'react-redux'
+import { teachersData } from "../toolkit/DataReducer";
+import { useDispatch, useSelector } from "react-redux";
+const API_URL = import.meta.env.VITE_BACKEND_API;
 function Teachers() {
   const navigate = useNavigate();
-  const teachers = useSelector(state=>state.data.teachers);
-  const dispatch = useDispatch()
+  const teachers = useSelector((state) => state.data.teachers);
+  const dispatch = useDispatch();
   const [teacherToggle, setTeacherToggle] = useState(false);
   const [teacherData, setTeacherData] = useState({
     teacherName: "",
@@ -17,17 +18,17 @@ function Teachers() {
     mobile: "",
   });
   const [file, setFile] = useState();
-useEffect(()=>{
-  dispatch(teachersData())
-},[])
+  useEffect(() => {
+    dispatch(teachersData());
+  }, []);
   const teacherAddHandler = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     const formData = new FormData();
     formData.append("image", file);
-    formData.append("data",JSON.stringify(teacherData));
+    formData.append("data", JSON.stringify(teacherData));
 
     const response = await axios.post(
-      "http://localhost:5000/teacher/add-teacher",
+      `${API_URL}teacher/add-teacher`,
       formData,
       {
         headers: {
@@ -36,8 +37,8 @@ useEffect(()=>{
         withCredentials: true,
       }
     );
-    navigate('/teachers',{replace:true});
-    window.location.reload()
+    navigate("/teachers", { replace: true });
+    window.location.reload();
   };
 
   return (
@@ -206,7 +207,8 @@ useEffect(()=>{
         {/* Table Section */}
         {/* Table Section */}
         <div className="relative overflow-x-auto sm:rounded-lg mt-4">
-          <TeacherTable Data={teachers}
+          <TeacherTable
+            Data={teachers}
             columns={[
               { key: "name", label: "TeacherName" },
               { key: "phone", label: "Mobile Number" },

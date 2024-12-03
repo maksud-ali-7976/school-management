@@ -1,18 +1,18 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { ClearLogin, setAuth } from "../AuthReducer";
-
+const API_URL = import.meta.env.VITE_BACKEND_API;
 export const CheckAuth = createAsyncThunk(
   "auth/checkAuth",
   async (_, thunkAPI) => {
     try {
-      const response = await axios.get("http://localhost:5000/user/checkAuth", {
+      const response = await axios.get(`${API_URL}user/checkAuth`, {
         withCredentials: true,
       });
 
       if (response.data.success == true) {
         thunkAPI.dispatch(setAuth(response.data.user));
-      } else{
+      } else {
         thunkAPI.dispatch(ClearLogin());
       }
       return response.data;
@@ -28,7 +28,7 @@ export const LoginThunk = createAsyncThunk(
   async (loginInfo, thunkAPI) => {
     try {
       const response = await axios.post(
-        "http://localhost:5000/user/login",
+        `${API_URL}user/login`,
         loginInfo,
         {
           withCredentials: true,
