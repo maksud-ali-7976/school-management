@@ -18,7 +18,7 @@ ConnectToMongoDb(process.env.MONGO_URI)
 
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "https://school-management-six-liard.vercel.app",
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
     credentials: true,
   })

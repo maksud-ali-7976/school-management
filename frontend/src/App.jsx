@@ -27,7 +27,7 @@ function App() {
     ) {
       dispatch(CheckAuth());
     } else {
-      navigate("/admin/login");
+      navigate("/admin/register");
     }
   }, []);
 
