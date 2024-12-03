@@ -1,7 +1,7 @@
 import axios from "axios";
 import React from "react";
 import { useState } from "react";
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
 const API_URL = import.meta.env.VITE_BACKEND_API;
 const Register = () => {
   const navigate = useNavigate();
@@ -13,13 +13,12 @@ const Register = () => {
 
   const SubmitHandler = async (e) => {
     e.preventDefault();
-    const response = await axios.post(
-      `${API_URL}/user/register`,
-      userInfo
-    );
+    const response = await axios.post(`${API_URL}/user/register`, userInfo, {
+      withCredentials: true,
+    });
     console.log(response.data);
     // return response.data;
-    navigate('/admin/login')
+    navigate("/admin/login");
   };
 
   return (
