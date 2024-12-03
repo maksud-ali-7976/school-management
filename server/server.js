@@ -28,7 +28,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use("/uploads", express.static(path.join(__dirname, "public/upload")));
 app.use("/teachers", express.static(path.join(__dirname, "public/teacher")));
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 5000;
 
 app.use("/user", UserRoutes);
 app.use("/student", StudentsRoute);
