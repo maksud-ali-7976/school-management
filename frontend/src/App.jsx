@@ -20,13 +20,17 @@ function App() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   useEffect(() => {
-    if (isAuthenticated && window.location.pathname !== 'http://localhost:5173/admin/login') {
-     dispatch(CheckAuth())
-    }else{
-      navigate('/admin/login')
+    if (
+      isAuthenticated &&
+      window.location.pathname !== "http://localhost:5173/admin/login" &&
+      window.location.pathname !== "http://localhost:5173/admin/register"
+    ) {
+      dispatch(CheckAuth());
+    } else {
+      navigate("/admin/login");
     }
   }, []);
- 
+
   return (
     <>
       <div className="h-screen">

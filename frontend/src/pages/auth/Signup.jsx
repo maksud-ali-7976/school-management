@@ -18,7 +18,7 @@ const Register = () => {
     );
     console.log(response.data);
     // return response.data;
-    navigate('/login')
+    navigate('/admin/login')
   };
 
   return (
