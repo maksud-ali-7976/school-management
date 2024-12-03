@@ -6,7 +6,7 @@ const API_URL = import.meta.env.VITE_BACKEND_API;
 export const studentDataFetch = createAsyncThunk(
   "data/studentFetch",
   async () => {
-    const response = await axios.get(`${API_URL}student/all-student`, {
+    const response = await axios.get(`${API_URL}/student/all-student`, {
       withCredentials: true,
     });
 
@@ -16,14 +16,14 @@ export const studentDataFetch = createAsyncThunk(
 
 export const teachersData = createAsyncThunk("data/teachersFetch", async () => {
   const response = await axios.get(
-    `${API_URL}teacher/all-teacher`,
+    `${API_URL}/teacher/all-teacher`,
     { withCredentials: true }
   );
   return response.data;
 });
 
 export const driversFetch = createAsyncThunk("data/driversFetch", async () => {
-  const response = await axios.get(`${API_URL}driver/all-driver`, {
+  const response = await axios.get(`${API_URL}/driver/all-driver`, {
     withCredentials: true,
   });
 

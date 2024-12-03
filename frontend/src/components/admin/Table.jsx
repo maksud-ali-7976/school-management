@@ -15,7 +15,7 @@ const Table = ({ Data, columns }) => {
   });
   const HandlerForStudentDelete = async (id) => {
     const response = await axios.delete(
-      `${API_URL}student/delete-student/${id}`,
+      `${API_URL}/student/delete-student/${id}`,
       {
         withCredentials: true,
       }
@@ -24,7 +24,7 @@ const Table = ({ Data, columns }) => {
     window.location.reload();
   };
   const editHandler = async (id) => {
-    const response = await axios.get(`${API_URL}student/student/${id}`, {
+    const response = await axios.get(`${API_URL}/student/student/${id}`, {
       withCredentials: true,
     });
     setEditStudentData(response.data.data);
@@ -32,7 +32,7 @@ const Table = ({ Data, columns }) => {
   const HandlerForUpdate = async (e) => {
     e.preventDefault();
     const response = await axios.patch(
-      `${API_URL}student/update-student/${editStudentData._id}
+      `${API_URL}/student/update-student/${editStudentData._id}
     `,
       editStudentData,
       {

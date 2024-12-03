@@ -6,7 +6,7 @@ export const CheckAuth = createAsyncThunk(
   "auth/checkAuth",
   async (_, thunkAPI) => {
     try {
-      const response = await axios.get(`${API_URL}user/checkAuth`, {
+      const response = await axios.get(`${API_URL}/user/checkAuth`, {
         withCredentials: true,
       });
 
@@ -28,7 +28,7 @@ export const LoginThunk = createAsyncThunk(
   async (loginInfo, thunkAPI) => {
     try {
       const response = await axios.post(
-        `${API_URL}user/login`,
+        `${API_URL}/user/login`,
         loginInfo,
         {
           withCredentials: true,
