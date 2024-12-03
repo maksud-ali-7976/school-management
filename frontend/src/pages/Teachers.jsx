@@ -28,7 +28,7 @@ function Teachers() {
     formData.append("data", JSON.stringify(teacherData));
 
     const response = await axios.post(
-      `${API_URL}/teacher/add-teacher`,
+      `${API_URL}teacher/add-teacher`,
       formData,
       {
         headers: {

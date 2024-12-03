@@ -31,7 +31,7 @@ const Student = () => {
     formData.append("data", JSON.stringify(StudentData));
 
     const response = await axios.post(
-      `${API_URL}/student/add-student`,
+      `${API_URL}student/add-student`,
       formData,
       {
         headers: {

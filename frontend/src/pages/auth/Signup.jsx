@@ -13,7 +13,7 @@ const Register = () => {
 
   const SubmitHandler = async (e) => {
     e.preventDefault();
-    const response = await axios.post(`${API_URL}/user/register`, userInfo, {
+    const response = await axios.post(`${API_URL}user/register`, userInfo, {
       withCredentials: true,
     });
     console.log(response.data);
