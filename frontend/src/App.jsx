@@ -22,8 +22,10 @@ function App() {
   useEffect(() => {
     if (
       isAuthenticated &&
-      window.location.pathname !== "http://localhost:5173/admin/login" &&
-      window.location.pathname !== "http://localhost:5173/admin/register"
+      window.location.pathname !==
+        "https://school-management-six-liard.vercel.app/admin/login" &&
+      window.location.pathname !==
+        "https://school-management-six-liard.vercel.app//admin/register"
     ) {
       dispatch(CheckAuth());
     } else {
