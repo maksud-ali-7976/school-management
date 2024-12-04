@@ -14,6 +14,11 @@ const Register = () => {
   const SubmitHandler = async (e) => {
     e.preventDefault();
     const response = await axios.post(`${API_URL}user/register`, userInfo, {
+      headers: {
+        "Content-Type": "application/json", // Data format
+        "Access-Control-Allow-Origin":
+          "https://school-management-9c3faa7cp-maksud-alis-projects.vercel.app",
+      },
       withCredentials: true,
     });
     console.log(response.data);
