@@ -2,7 +2,7 @@ import Students from "../models/students.js";
 
 export async function HandlerForStudentAdmission(req, res) {
   try {
-    const profile = `http://localhost:5000/uploads/${req.file.filename}`;
+    const profile = `https://school-management-1-u1oy.onrender.com/uploads/${req.file.filename}`;
     const {
       studentName,
       studentFather,

@@ -2,7 +2,7 @@ import { Teacher } from "../models/teachermodel.js";
 
 export async function HandlerForTeacherAdd(req, res) {
   try {
-    const profile = `http://localhost:5000/teachers/${req.file.filename}`;
+    const profile = `https://school-management-1-u1oy.onrender.com/teachers/${req.file.filename}`;
     const { teacherName, salary, address, mobile, subject } = JSON.parse(
       req.body.data
     );
