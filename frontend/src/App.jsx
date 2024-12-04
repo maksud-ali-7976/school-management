@@ -25,7 +25,7 @@ function App() {
       window.location.pathname !==
         "https://school-management-six-liard.vercel.app/admin/login" &&
       window.location.pathname !==
-        "https://school-management-six-liard.vercel.app//admin/register"
+        "https://school-management-six-liard.vercel.app/admin/register"
     ) {
       dispatch(CheckAuth());
     } else {
