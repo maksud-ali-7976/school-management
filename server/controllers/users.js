@@ -42,7 +42,7 @@ export async function HandlerForUserLogin(req, res) {
         res.cookie("token", token, {
           httpOnly: true, // Makes cookie inaccessible to client-side JS
           secure: process.env.NODE_ENV === "production", // Ensure HTTPS in production
-          sameSite: "Strict", // Prevent CSRF attacks
+          sameSite: "none", // Prevent CSRF attacks
           maxAge: 24 * 60 * 60 * 1000, // 1 day expiration
         });
 
