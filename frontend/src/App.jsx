@@ -29,7 +29,7 @@ function App() {
     ) {
       dispatch(CheckAuth());
     } else {
-      navigate("/admin/register");
+      navigate("/admin/login");
     }
   }, []);
 
