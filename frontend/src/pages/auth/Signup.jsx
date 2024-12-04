@@ -17,7 +17,7 @@ const Register = () => {
       headers: {
         "Content-Type": "application/json", // Data format
         "Access-Control-Allow-Origin":
-          "https://school-management-9c3faa7cp-maksud-alis-projects.vercel.app",
+          "https://school-management-six-liard.vercel.app",
       },
       withCredentials: true,
     });
