@@ -2,7 +2,7 @@ import { Teacher } from "../models/teachermodel.js";
 
 export async function HandlerForTeacherAdd(req, res) {
   try {
-    const profile = `https://school-management-1-u1oy.onrender.com/teachers/${req.file.filename}`;
+    const profile = req.file.path;
     const { teacherName, salary, address, mobile, subject } = JSON.parse(
       req.body.data
     );
@@ -29,12 +29,20 @@ export async function HandlerForTeacherAdd(req, res) {
 
 export async function HandlerForGettingAllTeacher(req, res) {
   try {
-    const allTeacher = await Teacher.find();
+    const { page = 1, limit = 10 } = req.query;
+    const allTeacher = await Teacher.find()
+      .skip((page - 1) * limit)
+      .limit(limit);
+    const total = await Teacher.countDocuments();
     if (allTeacher) {
       return res.status(200).json({
         success: true,
         message: "Teacher Find Success",
         data: allTeacher,
+        total: total,
+        page: Number(page),
+        limit: Number(limit),
+        totalPage: Math.ceil(total / limit),
       });
     } else {
       return res.json({ success: false, message: "Error happened" });

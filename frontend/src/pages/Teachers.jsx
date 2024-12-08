@@ -8,6 +8,7 @@ const API_URL = import.meta.env.VITE_BACKEND_API;
 function Teachers() {
   const navigate = useNavigate();
   const teachers = useSelector((state) => state.data.teachers);
+  const totalPage = useSelector((state) => state.data.totalTeacherPage);
   const dispatch = useDispatch();
   const [teacherToggle, setTeacherToggle] = useState(false);
   const [teacherData, setTeacherData] = useState({
@@ -227,13 +228,10 @@ function Teachers() {
             Previous
           </button>
           <div className="flex space-x-2">
-            {[1, 2, 3, 4, 5].map((page) => (
-              <button
-                key={page}
-                className="px-3 py-1 rounded-md hover:bg-indigo-600 hover:text-white"
-              >
-                {page}
-              </button>
+            {Array.from({ length: totalPage }, (_, index) => (
+              <span key={index + 1} className="page-number">
+                {index + 1}
+              </span>
             ))}
           </div>
           <button className="text-gray-600 hover:text-indigo-700">Next</button>

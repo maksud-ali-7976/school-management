@@ -6,13 +6,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { studentDataFetch } from "../toolkit/DataReducer";
 const Student = () => {
   const dispatch = useDispatch();
+  const [page, setPage] = useState(1);
+  const limit = 5;
   useEffect(() => {
-    dispatch(studentDataFetch());
+    dispatch(studentDataFetch({ page, limit }));
   });
   const API_URL = import.meta.env.VITE_BACKEND_API;
   const navigate = useNavigate();
   const formData = new FormData();
   const students = useSelector((state) => state.data.students);
+  const totalPage = useSelector((state) => state.date.totalStudentPage);
   const [StudentToggle, setStudentToggle] = useState(false);
   const [StudentData, setStudentData] = useState({
     studentName: "",
@@ -193,6 +196,19 @@ const Student = () => {
               { key: "feesStatus", label: "fessStatus" },
             ]}
           />
+        </div>
+        <div className="flex items-center justify-between py-6">
+          <button className="text-gray-600 hover:text-indigo-700">
+            Previous
+          </button>
+          <div className="flex space-x-2">
+            {Array.from({ length: totalPage }, (_, index) => (
+              <span key={index + 1} className="page-number">
+                {index + 1}
+              </span>
+            ))}
+          </div>
+          <button className="text-gray-600 hover:text-indigo-700">Next</button>
         </div>
       </div>
     </>

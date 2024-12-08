@@ -2,6 +2,8 @@ import express from "express";
 const router = express.Router();
 import multer from "multer";
 import { AuthMiddleware } from "../middleware/Auth.js";
+import cloudinary from "../config/cloudnery.js";
+import { CloudinaryStorage } from "multer-storage-cloudinary";
 import {
   HandlerForTeacherAdd,
   HandlerForGettingAllTeacher,
@@ -10,12 +12,13 @@ import {
   HandlerFroTeachersUpdate,
 } from "../controllers/Teachers.js";
 
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "public/teacher");
-  },
-  filename: function (req, file, cb) {
-    cb(null, `${Date.now()}-${file.originalname}`);
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: "upload",
+    format: async (req, res) => "jpeg",
+    public_id: async (req, file) =>
+      `${Date.now()}-${req.file.originalname.split(".")[0]}`,
   },
 });
 

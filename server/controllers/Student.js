@@ -2,7 +2,7 @@ import Students from "../models/students.js";
 
 export async function HandlerForStudentAdmission(req, res) {
   try {
-    const profile = `https://school-management-1-u1oy.onrender.com/uploads/${req.file.filename}`;
+    const profile = req.file.path;
     const {
       studentName,
       studentFather,
@@ -42,11 +42,18 @@ export async function HandlerForStudentAdmission(req, res) {
 
 export async function HandlerForGettingAllStudents(req, res) {
   try {
-    const AllStudents = await Students.find();
+    const { page = 1, limit = 10 } = req.query;
+    const AllStudents = await Students.find()
+      .skip((page - 1) * limit)
+      .limit(limit);
+    const total = await Students.countDocuments();
     return res.json({
       success: true,
       message: "student geting success",
       result: AllStudents,
+      total: total,
+      page,
+      totalPage: Math.ceil(total / limit),
     });
   } catch (error) {
     return res.status(404).json({ success: false, message: "error Happend" });
@@ -77,7 +84,14 @@ export async function HandlerForStudentDeleted(req, res) {
 }
 export async function HandlerForUpdatingStudentInformation(req, res) {
   const id = req.params.id;
-  const { studentName, studentFather, studentMother, totalFess, address, phone } = req.body;
+  const {
+    studentName,
+    studentFather,
+    studentMother,
+    totalFess,
+    address,
+    phone,
+  } = req.body;
   await Students.findByIdAndUpdate(id, {
     $set: {
       studentName: studentName,
