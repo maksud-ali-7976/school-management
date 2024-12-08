@@ -18,7 +18,7 @@ const storage = new CloudinaryStorage({
     folder: "upload",
     format: async (req, res) => "jpeg",
     public_id: async (req, file) =>
-      `${Date.now()}-${req.file.originalname.split(".")[0]}`,
+      `${Date.now()}-${file.originalname.split(".")[0]}`,
   },
 });
 
