@@ -25,23 +25,27 @@ function Teachers() {
     dispatch(teachersData({ page, limit }));
   }, []);
   const teacherAddHandler = async (e) => {
-    e.preventDefault();
-    const formData = new FormData();
-    formData.append("image", file);
-    formData.append("data", JSON.stringify(teacherData));
+    try {
+      e.preventDefault();
+      const formData = new FormData();
+      formData.append("image", file);
+      formData.append("data", JSON.stringify(teacherData));
 
-    const response = await axios.post(
-      `${API_URL}teacher/add-teacher`,
-      formData,
-      {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-        withCredentials: true,
-      }
-    );
-    navigate("/teachers", { replace: true });
-    window.location.reload();
+      const response = await axios.post(
+        `${API_URL}teacher/add-teacher`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+          withCredentials: true,
+        }
+      );
+      navigate("/teachers", { replace: true });
+      window.location.reload();
+    } catch (error) {
+      throw error;
+    }
   };
   const prevPage = () => {
     if (page > 1) {
