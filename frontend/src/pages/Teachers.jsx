@@ -10,6 +10,8 @@ function Teachers() {
   const teachers = useSelector((state) => state.data.teachers);
   console.log(teachers)
   const totalPage = useSelector((state) => state.data.totalTeacherPage);
+  const [page,setPage]  = useState(1);
+  const limit = 5;
   const dispatch = useDispatch();
   const [teacherToggle, setTeacherToggle] = useState(false);
   const [teacherData, setTeacherData] = useState({
@@ -21,7 +23,7 @@ function Teachers() {
   });
   const [file, setFile] = useState();
   useEffect(() => {
-    dispatch(teachersData());
+    dispatch(teachersData({page,limit}));
   }, []);
   const teacherAddHandler = async (e) => {
     e.preventDefault();
