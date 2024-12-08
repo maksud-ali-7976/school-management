@@ -49,7 +49,7 @@ function Teachers() {
     }
   };
   const nextPage = () => {
-    if (page < totalTeacherPage) {
+    if (page < totalPage) {
       setPage(page + 1);
     }
   };
