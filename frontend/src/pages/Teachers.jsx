@@ -8,6 +8,7 @@ const API_URL = import.meta.env.VITE_BACKEND_API;
 function Teachers() {
   const navigate = useNavigate();
   const teachers = useSelector((state) => state.data.teachers);
+  console.log(teachers)
   const totalPage = useSelector((state) => state.data.totalTeacherPage);
   const dispatch = useDispatch();
   const [teacherToggle, setTeacherToggle] = useState(false);
