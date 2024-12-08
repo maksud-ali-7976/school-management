@@ -15,7 +15,7 @@ const Student = () => {
   const navigate = useNavigate();
   const formData = new FormData();
   const students = useSelector((state) => state.data.students);
-  const totalPage = useSelector((state) => state.date.totalStudentPage);
+  const totalPage = useSelector((state) => state.data.totalStudentPage);
   const [StudentToggle, setStudentToggle] = useState(false);
   const [StudentData, setStudentData] = useState({
     studentName: "",
