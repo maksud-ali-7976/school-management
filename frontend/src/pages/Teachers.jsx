@@ -8,9 +8,8 @@ const API_URL = import.meta.env.VITE_BACKEND_API;
 function Teachers() {
   const navigate = useNavigate();
   const teachers = useSelector((state) => state.data.teachers);
-  console.log(teachers)
   const totalPage = useSelector((state) => state.data.totalTeacherPage);
-  const [page,setPage]  = useState(1);
+  const [page, setPage] = useState(1);
   const limit = 5;
   const dispatch = useDispatch();
   const [teacherToggle, setTeacherToggle] = useState(false);
@@ -23,7 +22,7 @@ function Teachers() {
   });
   const [file, setFile] = useState();
   useEffect(() => {
-    dispatch(teachersData({page,limit}));
+    dispatch(teachersData({ page, limit }));
   }, []);
   const teacherAddHandler = async (e) => {
     e.preventDefault();
@@ -43,6 +42,16 @@ function Teachers() {
     );
     navigate("/teachers", { replace: true });
     window.location.reload();
+  };
+  const prevPage = () => {
+    if (page > 1) {
+      setPage(page - 1);
+    }
+  };
+  const nextPage = () => {
+    if (page < totalTeacherPage) {
+      setPage(page + 1);
+    }
   };
 
   return (
@@ -227,7 +236,10 @@ function Teachers() {
 
         {/* Pagination */}
         <div className="flex items-center justify-between py-6">
-          <button className="text-gray-600 hover:text-indigo-700">
+          <button
+            className="text-gray-600 hover:text-indigo-700"
+            onClick={() => prevPage()}
+          >
             Previous
           </button>
           <div className="flex space-x-2">
@@ -237,7 +249,12 @@ function Teachers() {
               </span>
             ))}
           </div>
-          <button className="text-gray-600 hover:text-indigo-700">Next</button>
+          <button
+            className="text-gray-600 hover:text-indigo-700"
+            onClick={() => nextPage()}
+          >
+            Next
+          </button>
         </div>
       </div>
     </>
