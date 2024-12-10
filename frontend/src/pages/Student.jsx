@@ -224,7 +224,7 @@ const Student = () => {
         <div className="flex items-center justify-between py-6">
           <button
             className="text-gray-600 hover:text-indigo-700"
-            onClick={prevHandle()}
+            onClick={prevHandle}
           >
             Previous
           </button>
@@ -237,7 +237,7 @@ const Student = () => {
           </div>
           <button
             className="text-gray-600 hover:text-indigo-700"
-            onClick={nextPage()}
+            onClick={nextPage}
           >
             Next
           </button>
