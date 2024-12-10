@@ -83,7 +83,7 @@ const Student = () => {
             className="py-3 w-full md:w-[35vh] rounded-lg text-left p-2 hover:shadow-xl shadow-md border-spacing-2"
           />
           <button
-            onClick={searchHandler()}
+            onClick={searchHandler}
             className="bg-green-500 hover:cursor-pointer hover:shadow-md rounded-xl font-semibold text-base md:text-xl w-full md:w-[25vh]"
           >
             Search
