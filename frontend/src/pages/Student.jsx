@@ -8,10 +8,10 @@ const Student = () => {
   const dispatch = useDispatch();
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
-  const limit = 2;
+  const limit = 5;
   useEffect(() => {
     dispatch(studentDataFetch({ page, limit, search }));
-  }, [dispatch, page]);
+  },[dispatch,page]);
   const API_URL = import.meta.env.VITE_BACKEND_API;
   const navigate = useNavigate();
   const formData = new FormData();
@@ -56,17 +56,6 @@ const Student = () => {
       dispatch(studentDataFetch({ page: 1, limit, search }));
     } catch (error) {
       throw error;
-    }
-  };
-  const prevHandle = () => {
-    if (page > 1) {
-      setPage(page - 1);
-    }
-  };
-
-  const nextPage = () => {
-    if (page < totalPage) {
-      setPage(page + 1);
     }
   };
   return (
@@ -222,10 +211,7 @@ const Student = () => {
           />
         </div>
         <div className="flex items-center justify-between py-6">
-          <button
-            className="text-gray-600 hover:text-indigo-700"
-            onClick={prevHandle()}
-          >
+          <button className="text-gray-600 hover:text-indigo-700">
             Previous
           </button>
           <div className="flex space-x-2">
@@ -235,12 +221,7 @@ const Student = () => {
               </span>
             ))}
           </div>
-          <button
-            className="text-gray-600 hover:text-indigo-700"
-            onClick={nextPage()}
-          >
-            Next
-          </button>
+          <button className="text-gray-600 hover:text-indigo-700">Next</button>
         </div>
       </div>
     </>
