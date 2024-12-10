@@ -42,7 +42,7 @@ export async function HandlerForStudentAdmission(req, res) {
 
 export async function HandlerForGettingAllStudents(req, res) {
   try {
-    const { page = 1, limit = 10, search = "" } = req.query;
+    const { page = 1, limit = 10, search = "" } = await req.query;
     const query = search
       ? { studentName: { $regex: search, $option: "i" } }
       : {};
