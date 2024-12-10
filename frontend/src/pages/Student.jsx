@@ -7,9 +7,10 @@ import { studentDataFetch } from "../toolkit/DataReducer";
 const Student = () => {
   const dispatch = useDispatch();
   const [page, setPage] = useState(1);
+  const [search, setSearch] = useState("");
   const limit = 5;
   useEffect(() => {
-    dispatch(studentDataFetch({ page, limit }));
+    dispatch(studentDataFetch({ page, limit, search }));
   });
   const API_URL = import.meta.env.VITE_BACKEND_API;
   const navigate = useNavigate();
@@ -48,8 +49,15 @@ const Student = () => {
     window.location.reload();
     setStudentToggle(false);
   };
-  useEffect(() => {}, []);
-
+  const searchHandler = async (e) => {
+    e.preventDefault();
+    try {
+      setPage(1);
+      dispatch(studentDataFetch({ page: 1, limit, search }));
+    } catch (error) {
+      throw error;
+    }
+  };
   return (
     <>
       <div className="w-full p-4">
@@ -70,9 +78,14 @@ const Student = () => {
           <input
             type="text"
             placeholder="Search Here"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
             className="py-3 w-full md:w-[35vh] rounded-lg text-left p-2 hover:shadow-xl shadow-md border-spacing-2"
           />
-          <button className="bg-green-500 hover:cursor-pointer hover:shadow-md rounded-xl font-semibold text-base md:text-xl w-full md:w-[25vh]">
+          <button
+            onClick={searchHandler}
+            className="bg-green-500 hover:cursor-pointer hover:shadow-md rounded-xl font-semibold text-base md:text-xl w-full md:w-[25vh]"
+          >
             Search
           </button>
         </div>

@@ -42,11 +42,14 @@ export async function HandlerForStudentAdmission(req, res) {
 
 export async function HandlerForGettingAllStudents(req, res) {
   try {
-    const { page = 1, limit = 10 } = req.query;
-    const AllStudents = await Students.find()
+    const { page = 1, limit = 10, search = "" } = req.query;
+    const query = search
+      ? { studentName: { $regex: search, $option: "i" } }
+      : {};
+    const AllStudents = await Students.find(query)
       .skip((page - 1) * limit)
       .limit(limit);
-    const total = await Students.countDocuments();
+    const total = await Students.countDocuments(query);
     return res.json({
       success: true,
       message: "student geting success",

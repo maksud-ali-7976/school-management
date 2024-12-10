@@ -5,9 +5,9 @@ const API_URL = import.meta.env.VITE_BACKEND_API;
 
 export const studentDataFetch = createAsyncThunk(
   "data/studentFetch",
-  async ({ page, limit }) => {
+  async ({ page, limit, search }) => {
     const response = await axios.get(
-      `${API_URL}student/all-student?page=${page}&limit=${limit}`,
+      `${API_URL}student/all-student?page=${page}&limit=${limit}&search=${search}`,
       {
         withCredentials: true,
       }
@@ -19,9 +19,9 @@ export const studentDataFetch = createAsyncThunk(
 
 export const teachersData = createAsyncThunk(
   "data/teachersFetch",
-  async ({ page, limit }) => {
+  async ({ page, limit, search }) => {
     const response = await axios.get(
-      `${API_URL}teacher/all-teacher?page=${page}&limit=${limit}`,
+      `${API_URL}teacher/all-teacher?page=${page}&limit=${limit}&search=${search}`,
       {
         withCredentials: true,
       }
