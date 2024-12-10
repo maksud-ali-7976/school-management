@@ -44,7 +44,7 @@ export async function HandlerForGettingAllStudents(req, res) {
   try {
     const { page = 1, limit = 10, search = "" } = await req.query;
     const query = search
-      ? { studentName: { $regex: search, $option: "i" } }
+      ? { studentName: { $regex: search, $options: "i" } }
       : {};
     const AllStudents = await Students.find(query)
       .skip((page - 1) * limit)
