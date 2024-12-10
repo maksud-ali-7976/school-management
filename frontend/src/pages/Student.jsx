@@ -261,7 +261,6 @@ const Student = () => {
               { key: "totalFess", label: "totalFess" },
               { key: "address", label: "Address" },
               { key: "phone", label: "Phone" },
-              { key: "feesStatus", label: "fessStatus" },
             ]}
           />
         </div>
