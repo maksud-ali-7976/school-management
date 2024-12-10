@@ -6,7 +6,7 @@ export async function HandlerForStudentAdmission(req, res) {
     const {
       studentName,
       studentFather,
-      studentMother,
+      studentClass,
       totalFess,
       address,
       phone,
@@ -17,7 +17,7 @@ export async function HandlerForStudentAdmission(req, res) {
       const student = await Students.create({
         studentName,
         studentFather,
-        studentMother,
+        studentClass,
         totalFess,
         address,
         phone,
