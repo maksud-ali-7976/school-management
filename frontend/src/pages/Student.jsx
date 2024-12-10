@@ -11,7 +11,7 @@ const Student = () => {
   const limit = 5;
   useEffect(() => {
     dispatch(studentDataFetch({ page, limit, search }));
-  });
+  },[dispatch,page]);
   const API_URL = import.meta.env.VITE_BACKEND_API;
   const navigate = useNavigate();
   const formData = new FormData();
