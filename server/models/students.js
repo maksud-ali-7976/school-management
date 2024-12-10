@@ -10,7 +10,7 @@ const StudentSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    studentMother: {
+    studentClass: {
       type: String,
     },
     address: {
@@ -24,10 +24,6 @@ const StudentSchema = new mongoose.Schema(
     },
     profile:{
         type:String
-    },
-    feesStatus: {
-      type: Boolean,
-      default: false,
     },
   },
   { timestamps: true }

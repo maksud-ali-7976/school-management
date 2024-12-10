@@ -4,13 +4,17 @@ import { useNavigate } from "react-router-dom";
 import Table from "../components/admin/Table";
 import { useDispatch, useSelector } from "react-redux";
 import { studentDataFetch } from "../toolkit/DataReducer";
+import {Data} from '../components/config/ClassData'
 const Student = () => {
   const dispatch = useDispatch();
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
+  const [selectedClass, setSelectedClass] = useState("");
   const limit = 2;
   useEffect(() => {
-    dispatch(studentDataFetch({ page, limit, search }));
+    dispatch(
+      studentDataFetch({ page, limit, search, studentClass:selectedClass })
+    );
   }, [dispatch, page]);
   const API_URL = import.meta.env.VITE_BACKEND_API;
   const navigate = useNavigate();
@@ -21,7 +25,7 @@ const Student = () => {
   const [StudentData, setStudentData] = useState({
     studentName: "",
     studentFather: "",
-    studentMother: "",
+    studentClass: "",
     totalFess: "",
     address: "",
     phone: "",
@@ -53,7 +57,7 @@ const Student = () => {
     e.preventDefault();
     try {
       setPage(1);
-      dispatch(studentDataFetch({ page: 1, limit, search }));
+      dispatch(studentDataFetch({ page: 1, limit, search,studentClass:selectedClass }));
     } catch (error) {
       throw error;
     }
@@ -99,6 +103,33 @@ const Student = () => {
           >
             Search
           </button>
+          <div className="flex flex-col md:flex-row gap-4 mt-2">
+            <select
+              value={selectedClass}
+              onChange={(e) => {
+                setSelectedClass(e.target.value);
+                setPage(1);
+                dispatch(
+                  studentDataFetch({
+                    page: 1,
+                    limit,
+                    search,
+                    studentClass: e.target.value,
+                  })
+                );
+              }}
+              className="py-3  md:w-[35vh] rounded-lg text-left p-2 hover:shadow-xl shadow-md border-spacing-2"
+            >
+              <option value="">All Classes</option>
+              {Data.map((item, i) => {
+                return (
+                  <option key={i} value={item.id}>
+                    {item.name}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
         </div>
 
         {StudentToggle && (
@@ -135,19 +166,32 @@ const Student = () => {
                       })
                     }
                   />
-                  <label>motherName</label>
-                  <input
-                    type="text"
-                    className="bg-gray-100 w-full my-2 rounded-md p-2"
-                    placeholder="Enter Phone"
-                    value={StudentData.studentMother}
+                  <label
+                    htmlFor="countries"
+                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  >
+                    Select Class
+                  </label>
+                  <select
+                    id="countries"
+                    value={StudentData.studentClass}
                     onChange={(e) =>
                       setStudentData({
                         ...StudentData,
-                        studentMother: e.target.value,
+                        studentClass: e.target.value,
                       })
                     }
-                  />
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  >
+                    <option>Select Class</option>
+                    {Data.map((item, i) => {
+                      return (
+                        <option key={i} value={item.id}>
+                          {item.name}
+                        </option>
+                      );
+                    })}
+                  </select>
                   <label>Phone</label>
                   <input
                     type="text"
@@ -213,7 +257,7 @@ const Student = () => {
             columns={[
               { key: "name", label: "studentName" },
               { key: "father", label: "fatherName" },
-              { key: "mother", label: "motherName" },
+              { key: "class", label: "studentClass" },
               { key: "totalFess", label: "totalFess" },
               { key: "address", label: "Address" },
               { key: "phone", label: "Phone" },

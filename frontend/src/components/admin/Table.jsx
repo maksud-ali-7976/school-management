@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Data } from "../config/ClassData";
 const API_URL = import.meta.env.VITE_BACKEND_API;
 const Table = ({ Data, columns }) => {
   const navigate = useNavigate();
@@ -8,7 +9,7 @@ const Table = ({ Data, columns }) => {
   const [editStudentData, setEditStudentData] = useState({
     studentName: "",
     studentFather: "",
-    studentMother: "",
+    studentClass: "",
     totalFess: "",
     address: "",
     phone: "",
@@ -74,20 +75,10 @@ const Table = ({ Data, columns }) => {
                   </div>
                 </td>
                 <td className="px-6 py-4">{el.studentFather}</td>
-                <td className="px-6 py-4">{el.studentMother}</td>
+                <td className="px-6 py-4">{el.studentClass}</td>
                 <td className="px-6 py-4">{el.totalFess}</td>
                 <td className="px-6 py-4">{el.address}</td>
                 <td className="px-6 py-4">{el.phone}</td>
-                <td className="px-6 py-4">
-                  <div className="flex items-center">
-                    <span
-                      className={`h-2.5 w-2.5 rounded-full ${
-                        el.feesStatus ? "bg-green-500" : "bg-red-500"
-                      } mr-2`}
-                    ></span>
-                    {el.feesStatus ? "Paid" : "Due"}
-                  </div>
-                </td>
                 <td>
                   <button
                     className="w-[40%] bg-blue-500 h-5 text-black rounded-md"
@@ -159,23 +150,31 @@ const Table = ({ Data, columns }) => {
                   </div>
                   <div>
                     <label
-                      className="text-gray-700 dark:text-gray-200"
-                      htmlFor="password"
+                      htmlFor="countries"
+                      className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                     >
-                      motherName
+                      Select Class
                     </label>
-                    <input
-                      id="password"
-                      type="text"
-                      value={editStudentData.studentMother || ""}
+                    <select
+                      id="countries"
+                      value={editStudentData.studentClass || ""}
                       onChange={(e) =>
                         setEditStudentData({
                           ...editStudentData,
-                          studentMother: e.target.value,
+                          studentClass: e.target.value,
                         })
                       }
-                      className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
-                    />
+                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    >
+                      <option>Select Class</option>
+                      {Data.map((item, i) => {
+                        return (
+                          <option key={i} value={item.id}>
+                            {item.name}
+                          </option>
+                        );
+                      })}
+                    </select>
                   </div>
 
                   <div>
