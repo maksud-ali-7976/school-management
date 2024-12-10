@@ -49,6 +49,7 @@ export async function HandlerForGettingAllStudents(req, res) {
     const AllStudents = await Students.find(query)
       .skip((page - 1) * limit)
       .limit(limit);
+      console.log(AllStudents)
     const total = await Students.countDocuments(query);
     return res.json({
       success: true,
