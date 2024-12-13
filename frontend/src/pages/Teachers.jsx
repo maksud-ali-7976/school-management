@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { teachersData } from "../toolkit/DataReducer";
 import { useDispatch, useSelector } from "react-redux";
-import { Subject } from "../components/config/SubjectData";
+import { Subject } from "../components/config/Data";
 const API_URL = import.meta.env.VITE_BACKEND_API;
 function Teachers() {
   const navigate = useNavigate();
