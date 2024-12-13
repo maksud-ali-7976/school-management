@@ -48,10 +48,9 @@ const Student = () => {
         withCredentials: true, // Include cookies
       }
     );
-    console.log(response.data);
     navigate("/students", { replace: true });
-    window.location.reload();
     setStudentToggle(false);
+    return response.data;
   };
   const searchHandler = async (e) => {
     e.preventDefault();
