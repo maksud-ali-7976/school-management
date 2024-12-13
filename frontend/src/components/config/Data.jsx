@@ -38,7 +38,7 @@ export const  Subject = [
 ];
 
 
-export const Data = [
+export const ClassData = [
     {
         id:"ukg",
         name:"UKG"
