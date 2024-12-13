@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Table from "../components/admin/Table";
 import { useDispatch, useSelector } from "react-redux";
 import { studentDataFetch } from "../toolkit/DataReducer";
-import {Data} from '../components/config/ClassData'
+import {Data} from '../components/config/Data'
 const Student = () => {
   const dispatch = useDispatch();
   const [page, setPage] = useState(1);
