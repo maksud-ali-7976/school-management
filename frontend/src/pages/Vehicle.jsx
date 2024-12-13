@@ -58,7 +58,7 @@ const Student = () => {
         <div className="flex flex-col items-end mb-4">
           <button
             className="bg-orange-500 py-2 rounded-lg text-base md:text-xl font-semibold font-sans w-full md:w-[30vh] hover:shadow-lg"
-            onClick={() => setVehicleToggle(true)}
+            onClick={() => setDriverToggle(true)}
           >
             Add Vehicle
           </button>

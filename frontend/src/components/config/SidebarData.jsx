@@ -23,9 +23,9 @@ export const Data   = [
           path:"/students"
     },
     {
-        id:"vehicle",
-        name:"Vehicles",
+        id:"driver",
+        name:"Drivers",
         logo:<FaCarSide/>,
-          path:"/vehicle"
+          path:"/driver"
     }
 ]
