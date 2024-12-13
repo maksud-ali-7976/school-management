@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { stat } from "fs";
 const API_URL = import.meta.env.VITE_BACKEND_API;
 // student ka data fetch ke liye thunk
 
@@ -30,13 +31,19 @@ export const teachersData = createAsyncThunk(
   }
 );
 
-export const driversFetch = createAsyncThunk("data/driversFetch", async () => {
-  const response = await axios.get(`${API_URL}driver/all-driver`, {
-    withCredentials: true,
-  });
+export const driversFetch = createAsyncThunk(
+  "data/driversFetch",
+  async ({ page, limit, search, route }) => {
+    const response = await axios.get(
+      `${API_URL}driver/all-driver?page=${page}&limit=${limit}&search=${search}&route=${route}`,
+      {
+        withCredentials: true,
+      }
+    );
 
-  return response.data;
-});
+    return response.data;
+  }
+);
 
 const dataSlice = createSlice({
   name: "data",
@@ -46,6 +53,7 @@ const dataSlice = createSlice({
     teachers: [],
     totalTeacherPage: 0,
     drivers: [],
+    totalDriverPage: 0,
     isLoading: false,
     error: null,
   },
@@ -69,6 +77,13 @@ const dataSlice = createSlice({
       .addCase(teachersData.fulfilled, (state, action) => {
         state.teachers = action.payload.data;
         state.totalTeacherPage = action.payload.totalPage;
+      })
+      .addCase(driversFetch.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(driversFetch.fulfilled, (state, action) => {
+        (state.drivers = action.payload.result),
+          (state.totalDriverPage = action.payload.totalPage);
       });
   },
 });

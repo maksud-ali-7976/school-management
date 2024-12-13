@@ -1,13 +1,25 @@
-import React, { useState } from "react";
-
+import React, { useEffect, useState } from "react";
+import DriverTable from "../components/admin/DriverTable";
+import { useDispatch, useSelector } from "react-redux";
+import { driversFetch } from "../toolkit/DataReducer";
 const Student = () => {
   const [VehicleToggle, setVehicleToggle] = useState(false);
+  const drivers = useSelector((state) => state.data.drivers);
+  const dispatch = useDispatch();
+  const [page, setPage] = useState(1);
+  const limit = 5;
+  const [route, setRoute] = useState("");
+  const [search, setSearch] = useState("");
+
+  useEffect(() => {
+    dispatch(driversFetch({ page, limit, search, route }));
+  }, [dispatch, page, limit, search]);
 
   return (
     <>
       <div className="w-full p-4">
         <h1 className="text-start font-semibold font-mono text-lg md:text-2xl">
-          Dashboard Teacher
+          Dashboard Driver
         </h1>
 
         <div className="flex flex-col items-end mb-4">
@@ -80,23 +92,15 @@ const Student = () => {
             </div>
           </div>
         )}
-
-        <div className="relative overflow-x-auto shadow-md sm:rounded-lg mt-4">
-          <table className="w-full text-sm text-left text-gray-500">
-            <thead className="text-xs text-gray-700 uppercase bg-gray-50">
-              <tr>
-                <th className="p-4">Image</th>
-                <th className="px-6 py-3">Driver Name</th>
-                <th className="px-6 py-3">Vehicle Type</th>
-                <th className="px-6 py-3">Salary</th>
-                <th className="px-6 py-3">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-            
-            </tbody>
-          </table>
-        </div>
+        <DriverTable
+          Data={drivers}
+          columns={[
+            { key: "name", label: "Driver Name" },
+            { key: "vehicle", label: "Vehicle" },
+            { key: "salary", label: "Salary" },
+            { key: "route", label: "Routes" },
+          ]}
+        />
       </div>
     </>
   );
