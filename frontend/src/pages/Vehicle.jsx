@@ -99,6 +99,7 @@ const Student = () => {
             { key: "vehicle", label: "Vehicle" },
             { key: "salary", label: "Salary" },
             { key: "route", label: "Routes" },
+            { key: "action", label: "Actions" },
           ]}
         />
       </div>
