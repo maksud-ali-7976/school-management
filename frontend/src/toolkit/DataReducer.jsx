@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { stat } from "fs";
 const API_URL = import.meta.env.VITE_BACKEND_API;
 // student ka data fetch ke liye thunk
 
