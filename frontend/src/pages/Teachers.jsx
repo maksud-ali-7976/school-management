@@ -4,14 +4,20 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { teachersData } from "../toolkit/DataReducer";
 import { useDispatch, useSelector } from "react-redux";
+import { Subject } from "../components/config/SubjectData";
 const API_URL = import.meta.env.VITE_BACKEND_API;
 function Teachers() {
   const navigate = useNavigate();
   const teachers = useSelector((state) => state.data.teachers);
   const totalPage = useSelector((state) => state.data.totalTeacherPage);
   const [page, setPage] = useState(1);
+  const [search, setSearch] = useState("");
+  const [selectedSubject, setSelectedSubject] = useState("");
   const limit = 5;
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(teachersData({ page, limit, search, subject: selectedSubject }));
+  }, [page, limit, dispatch]);
   const [teacherToggle, setTeacherToggle] = useState(false);
   const [teacherData, setTeacherData] = useState({
     teacherName: "",
@@ -21,9 +27,6 @@ function Teachers() {
     mobile: "",
   });
   const [file, setFile] = useState();
-  useEffect(() => {
-    dispatch(teachersData({ page, limit }));
-  }, []);
   const teacherAddHandler = async (e) => {
     try {
       e.preventDefault();
@@ -57,6 +60,17 @@ function Teachers() {
       setPage(page + 1);
     }
   };
+  const handleSearch = async (e) => {
+    e.preventDefault();
+    try {
+      setPage(1);
+      dispatch(
+        teachersData({ page: 1, limit, search, subject: selectedSubject })
+      );
+    } catch (error) {
+      throw error;
+    }
+  };
 
   return (
     <>
@@ -81,11 +95,43 @@ function Teachers() {
           <input
             type="text"
             placeholder="Search Here"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
             className="py-3 w-full md:w-[35vh] rounded-lg text-left p-2 hover:shadow-xl shadow-md border-spacing-2"
           />
-          <button className="bg-green-500 hover:cursor-pointer hover:shadow-md rounded-xl font-semibold text-base md:text-xl w-full md:w-[25vh]">
+          <button
+            onClick={handleSearch}
+            className="bg-green-500 hover:cursor-pointer hover:shadow-md rounded-xl font-semibold text-base md:text-xl w-full md:w-[25vh]"
+          >
             Search
           </button>
+          <div className="flex flex-col md:flex-row gap-4 mt-2">
+            <select
+              value={selectedSubject}
+              onChange={(e) => {
+                setSelectedSubject(e.target.value);
+                setPage(1);
+                dispatch(
+                  studentDataFetch({
+                    page: 1,
+                    limit,
+                    search,
+                    subject: e.target.value,
+                  })
+                );
+              }}
+              className="py-3  md:w-[35vh] rounded-lg text-left p-2 hover:shadow-xl shadow-md border-spacing-2"
+            >
+              <option value="">All Classes</option>
+              {Subject.map((item, i) => {
+                return (
+                  <option key={i} value={item.id}>
+                    {item.name}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
         </div>
 
         {/* Modal for Adding Teachers */}
@@ -180,14 +226,13 @@ function Teachers() {
                   </div>
                   <div>
                     <label
-                      className="text-gray-700 dark:text-gray-200"
-                      htmlFor="passwordConfirmation"
+                      htmlFor="countries"
+                      className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                     >
-                      Subject
+                      Select Class
                     </label>
-                    <input
-                      id="subject"
-                      type="text"
+                    <select
+                      id="countries"
                       value={teacherData.subject}
                       onChange={(e) =>
                         setTeacherData({
@@ -195,8 +240,17 @@ function Teachers() {
                           subject: e.target.value,
                         })
                       }
-                      className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
-                    />
+                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    >
+                      <option>Select Class</option>
+                      {Subject.map((item, i) => {
+                        return (
+                          <option key={i} value={item.id}>
+                            {item.name}
+                          </option>
+                        );
+                      })}
+                    </select>
                   </div>
                   <input
                     className="block w-full mb-5 text-xs text-gray-900 border rounded-lg cursor-pointer bg-gray-50"

@@ -29,11 +29,18 @@ export async function HandlerForTeacherAdd(req, res) {
 
 export async function HandlerForGettingAllTeacher(req, res) {
   try {
-    const { page = 1, limit = 10 } = req.query;
-    const allTeacher = await Teacher.find()
+    const { page = 1, limit = 10, search = "", subject: subject } = req.query;
+    const query = {};
+    if (search) {
+      query.teacherName = { $regex: search, $options: "i" };
+    }
+    if (subject) {
+      query.subject = subject;
+    }
+    const allTeacher = await Teacher.find(query)
       .skip((page - 1) * limit)
       .limit(limit);
-    const total = await Teacher.countDocuments();
+    const total = await Teacher.countDocuments(query);
     if (allTeacher) {
       return res.status(200).json({
         success: true,
