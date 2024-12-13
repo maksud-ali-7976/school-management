@@ -10,6 +10,7 @@ export async function HandlerForAddDriver(req, res) {
       route,
       salary,
       vehicle,
+      mobile,
       profile,
     });
     return res

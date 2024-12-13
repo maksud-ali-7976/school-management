@@ -17,6 +17,9 @@ const driverSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    mobile: {
+      type: Number,
+    },
     profile: {
       type: String,
     },

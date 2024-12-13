@@ -81,7 +81,7 @@ const Student = () => {
               <h2 className="text-lg font-semibold  text-gray-700 capitalize dark:text-white">
                 Drivers Form
               </h2>
-              <form encType="multipart/form-data" onSubmit={teacherAddHandler}>
+              <form encType="multipart/form-data" onSubmit={studentAddHandler}>
                 <div className="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
                   <div>
                     <label
@@ -113,7 +113,7 @@ const Student = () => {
                     </label>
                     <input
                       id="mobile"
-                      type="text"
+                      type="number"
                       value={driverData.mobile}
                       onChange={(e) =>
                         setDriverData({
