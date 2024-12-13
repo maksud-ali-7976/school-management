@@ -2,8 +2,12 @@ import React, { useEffect, useState } from "react";
 import DriverTable from "../components/admin/DriverTable";
 import { useDispatch, useSelector } from "react-redux";
 import { driversFetch } from "../toolkit/DataReducer";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+const API_URL = import.meta.env.VITE_BACKEND_API;
 const Student = () => {
-  const [VehicleToggle, setVehicleToggle] = useState(false);
+  const [driverToggle, setDriverToggle] = useState(false);
+  const navigate = useNavigate();
   const drivers = useSelector((state) => state.data.drivers);
   const dispatch = useDispatch();
   const [page, setPage] = useState(1);
@@ -14,7 +18,36 @@ const Student = () => {
   useEffect(() => {
     dispatch(driversFetch({ page, limit, search, route }));
   }, [dispatch, page, limit, search]);
-
+  const [driverData, setDriverData] = useState({
+    name: "",
+    salary: "",
+    vehicle: "",
+    route: "",
+    mobile: "",
+  });
+  const [image, setImage] = useState("");
+  const studentAddHandler = async (e) => {
+    e.preventDefault();
+    try {
+      const formData = new FormData();
+      formData.append("image", image);
+      formData.append("data", JSON.stringify(driverData));
+      const response = await axios.post(
+        `${API_URL}driver/add-driver`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+          withCredentials: true,
+        }
+      );
+      navigate("/driver", { replace: true });
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  };
   return (
     <>
       <div className="w-full p-4">
@@ -42,66 +75,139 @@ const Student = () => {
           </button>
         </div>
 
-        {VehicleToggle && (
+        {driverToggle && (
           <div className="fixed inset-0 bg-[rgba(0,0,0,0.3)] flex items-center justify-center z-50">
-            <div className="p-4 bg-white rounded-lg w-[90vw] md:w-[60vw] lg:w-[35vw]">
-              <h2 className="text-center text-lg text-black mb-4 font-semibold">
-                Add Vehicle
+            <section className=" p-6 mx-auto bg-white rounded-md shadow-md dark:bg-gray-800 mt-10">
+              <h2 className="text-lg font-semibold  text-gray-700 capitalize dark:text-white">
+                Drivers Form
               </h2>
-              <div>
-                <label>Driver Name</label>
-                <input
-                  type="text"
-                  className="bg-gray-100 w-full my-2 rounded-md p-2"
-                  placeholder="Enter Name"
-                />
-                <label>Vehicle Type</label>
-                <input
-                  type="text"
-                  className="bg-gray-100 w-full my-2 rounded-md p-2"
-                  placeholder="Enter Address"
-                />
-                <label>Phone</label>
-                <input
-                  type="text"
-                  className="bg-gray-100 w-full my-2 rounded-md p-2"
-                  placeholder="Enter Phone"
-                />
-                <label>Salary</label>
-                <input
-                  type="text"
-                  className="bg-gray-100 w-full my-2 rounded-md p-2"
-                  placeholder="Enter Salary"
-                />
-                <input
-                  className="block w-full mb-5 text-xs text-gray-900 border rounded-lg cursor-pointer bg-gray-50"
-                  type="file"
-                />
-              </div>
-              <div className="flex gap-4 justify-center mt-4">
-                <button className="p-2 bg-blue-600 text-white rounded w-1/2 hover:bg-blue-700">
-                  Add
-                </button>
-                <button
-                  className="p-2 bg-red-400 text-white rounded w-1/2 hover:bg-red-500"
-                  onClick={() => setVehicleToggle(false)}
-                >
-                  Cancel
-                </button>
-              </div>
-            </div>
+              <form encType="multipart/form-data" onSubmit={teacherAddHandler}>
+                <div className="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
+                  <div>
+                    <label
+                      className="text-gray-700 dark:text-gray-200"
+                      htmlFor="username"
+                    >
+                      Driver Name
+                    </label>
+                    <input
+                      id="username"
+                      type="text"
+                      value={driverData.name}
+                      onChange={(e) =>
+                        setDriverData({
+                          ...driverData,
+                          name: e.target.value,
+                        })
+                      }
+                      className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+                    />
+                  </div>
+
+                  <div>
+                    <label
+                      className="text-gray-700 dark:text-gray-200"
+                      htmlFor="password"
+                    >
+                      Mobile Number
+                    </label>
+                    <input
+                      id="mobile"
+                      type="text"
+                      value={driverData.mobile}
+                      onChange={(e) =>
+                        setDriverData({
+                          ...driverData,
+                          mobile: e.target.value,
+                        })
+                      }
+                      className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+                    />
+                  </div>
+
+                  <div>
+                    <label
+                      className="text-gray-700 dark:text-gray-200"
+                      htmlFor="passwordConfirmation"
+                    >
+                      Salary
+                    </label>
+                    <input
+                      id="salary"
+                      type="text"
+                      value={driverData.salary}
+                      onChange={(e) =>
+                        setDriverData({
+                          ...driverData,
+                          salary: e.target.value,
+                        })
+                      }
+                      className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      htmlFor="countries"
+                      className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    >
+                      Select vehicle
+                    </label>
+                    <select
+                      id="countries"
+                      value={driverData.vehicle}
+                      onChange={(e) =>
+                        setDriverData({
+                          ...driverData,
+                          vehicle: e.target.value,
+                        })
+                      }
+                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    >
+                      <option>Select Vehicle</option>
+                      {Subject.map((item, i) => {
+                        return (
+                          <option key={i} value={item.id}>
+                            {item.name}
+                          </option>
+                        );
+                      })}
+                    </select>
+                  </div>
+                  <input
+                    className="block w-full mb-5 text-xs text-gray-900 border rounded-lg cursor-pointer bg-gray-50"
+                    name="image"
+                    type="file"
+                    onChange={(e) => setImage(e.target.files[0])}
+                  />
+                </div>
+                <div className="flex justify-start mt-6 gap-10 text-black">
+                  <button className="px-6 py-2 w-[45%] leading-5  transition-colors duration-200 transform bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-gray-600">
+                    Add
+                  </button>
+                  <button
+                    onClick={(e) => setDriverToggle(false)}
+                    className="px-6 py-2 w-[45%] leading-5  transition-colors duration-200 transform bg-red-500 rounded-md hover:bg-red-600 focus:outline-none focus:bg-gray-600"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </form>
+            </section>
           </div>
         )}
-        <DriverTable
-          Data={drivers}
-          columns={[
-            { key: "name", label: "Driver Name" },
-            { key: "vehicle", label: "Vehicle" },
-            { key: "salary", label: "Salary" },
-            { key: "route", label: "Routes" },
-            { key: "action", label: "Actions" },
-          ]}
-        />
+        <div className="relative overflow-x-auto sm:rounded-lg mt-4">
+          <DriverTable
+            Data={drivers}
+            columns={[
+              { key: "name", label: "Driver Name" },
+              { key: "vehicle", label: "Vehicle" },
+              { key: "salary", label: "Salary" },
+              { key: "route", label: "Routes" },
+              { key: "number", label: "Mobile Number" },
+              { key: "action", label: "Actions" },
+            ]}
+          />
+        </div>
       </div>
     </>
   );

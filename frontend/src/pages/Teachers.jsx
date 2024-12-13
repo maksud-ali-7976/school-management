@@ -45,7 +45,6 @@ function Teachers() {
         }
       );
       navigate("/teachers", { replace: true });
-      window.location.reload();
     } catch (error) {
       throw error;
     }

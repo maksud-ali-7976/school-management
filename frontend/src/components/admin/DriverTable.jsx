@@ -26,25 +26,18 @@ const DriverTable = ({ Data, columns }) => {
                     alt="Jese image"
                   />
                   <div className="pl-3">
-                    <div className="text-base font-semibold">
-                      {el.name}
-                    </div>
+                    <div className="text-base font-semibold">{el.name}</div>
                   </div>
                 </td>
                 <td className="px-6 py-4">{el.vehicle}</td>
                 <td className="px-6 py-4">{el.salary}</td>
                 <td className="px-6 py-4">{el.route}</td>
+                <td className="px-6 py-4">{el.number}</td>
                 <td>
-                  <button
-                    className="w-[40%] bg-blue-500 h-5 text-black rounded-md"
-                    onClick={(e) => (setEditToggle(true), editHandler(el._id))}
-                  >
+                  <button className="w-[40%] bg-blue-500 h-5 text-black rounded-md">
                     Edit
                   </button>
-                  <button
-                    className="w-[40%] bg-red-500 h-5 text-black rounded-md"
-                    onClick={(e) => teacherDelete(el._id)}
-                  >
+                  <button className="w-[40%] bg-red-500 h-5 text-black rounded-md">
                     Delete
                   </button>
                 </td>

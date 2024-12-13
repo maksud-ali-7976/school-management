@@ -9,7 +9,7 @@ const app = express();
 import UserRoutes from "./routes/user.js";
 import StudentsRoute from "./routes/Students.js";
 import teacherRoute from "./routes/Teachers.js";
-import driver from "./routes/driver.js";
+import driverRoute from "./routes/driver.js";
 import { ConnectToMongoDb } from "./config/mongodb.js";
 import cookieParser from "cookie-parser";
 
@@ -34,7 +34,7 @@ const PORT = process.env.PORT || 5000;
 app.use("/user", UserRoutes);
 app.use("/student", StudentsRoute);
 app.use("/teacher", teacherRoute);
-app.use("/driver", driver);
+app.use("/driver", driverRoute);
 
 app.listen(PORT, () => {
   console.log("server running on  " + PORT);
