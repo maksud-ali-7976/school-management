@@ -112,7 +112,7 @@ function Teachers() {
                 setSelectedSubject(e.target.value);
                 setPage(1);
                 dispatch(
-                  studentDataFetch({
+                  teachersData({
                     page: 1,
                     limit,
                     search,
