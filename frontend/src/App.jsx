@@ -30,7 +30,7 @@ function App() {
     ) {
       dispatch(CheckAuth());
     } else {
-      navigate("/admin/login");
+      navigate("/admin");
     }
   }, []);
 
@@ -55,7 +55,7 @@ function App() {
               }
             />
             <Route
-              path="register"
+              index
               element={
                 <PublicRoute>
                   <Register />
