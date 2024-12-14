@@ -111,16 +111,12 @@ const Navbar = () => {
                 <div>
                   <button
                     type="button"
-                    className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                    className="relative flex rounded-full bg-red-500 hover:bg-red-700 w-10 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
                     id="user-menu-button"
                     aria-expanded="false"
                     aria-haspopup="true"
-                    onClick={(e) => setUserToggleMenu(true)}
-                    onDoubleClick={(e) => setUserToggleMenu(false)}
                   >
-                    <span className="absolute -inset-1.5" />
-                    <span className="sr-only">Open user menu</span>
-                    <AiFillProfile className="bg-white" />
+                   LogOut
                   </button>
                 </div>
 
