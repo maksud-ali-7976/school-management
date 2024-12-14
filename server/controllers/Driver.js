@@ -1,10 +1,9 @@
-import { query } from "express";
 import { Driver } from "../models/Driver.js";
 
 export async function HandlerForAddDriver(req, res) {
   try {
     const profile = req.file.path;
-    const { name, route, salary, vehicle } = req.body.data;
+    const { name, route, salary, vehicle, mobile } = JSON.parse(req.body.data);
     const driverAdd = await Driver.create({
       name,
       route,
