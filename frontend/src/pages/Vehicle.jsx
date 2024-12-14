@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { driversFetch } from "../toolkit/DataReducer";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import {Vehicle} from '../components/config/Data'
+import {Vehicle} from '../components/config/data'
 const API_URL = import.meta.env.VITE_BACKEND_API;
 const Student = () => {
   const [driverToggle, setDriverToggle] = useState(false);
