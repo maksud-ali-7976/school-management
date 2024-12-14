@@ -17,7 +17,7 @@ const Register = () => {
       headers: {
         "Content-Type": "application/json", // Data format
         "Access-Control-Allow-Origin":
-          "https://school-management-six-liard.vercel.app",
+          "https://school-management-beryl-zeta.vercel.app",
       },
       withCredentials: true,
     });
