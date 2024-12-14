@@ -10,6 +10,7 @@ import LoginPage from "./pages/auth/login";
 import Register from "./pages/auth/Signup";
 import ProtectedRoute from "./middleware/protected";
 import Dashboard from "./pages/Dashboard";
+import PublicRoute from "./middleware/public";
 function App() {
   return (
     <>
@@ -58,8 +59,22 @@ function App() {
             />
           </Route>
           <Route path="/admin">
-            <Route path="login" element={<LoginPage />} />
-            <Route path="register" element={<Register />} />
+            <Route
+              path="login"
+              element={
+                <PublicRoute>
+                  <LoginPage />
+                </PublicRoute>
+              }
+            />
+            <Route
+              path="register"
+              element={
+                <PublicRoute>
+                  <Register />
+                </PublicRoute>
+              }
+            />
           </Route>
           <Route path="*" element={<Notfound />} />
         </Routes>
