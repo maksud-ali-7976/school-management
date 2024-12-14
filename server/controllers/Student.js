@@ -12,7 +12,6 @@ export async function HandlerForStudentAdmission(req, res) {
       phone,
     } = JSON.parse(req.body.data);
     const Student = await Students.findOne({ studentName });
-    console.log(req.user);
     if (Student === null) {
       const student = await Students.create({
         studentName,
@@ -22,7 +21,7 @@ export async function HandlerForStudentAdmission(req, res) {
         address,
         phone,
         profile,
-        addBy: req.user._id,
+        addBy: req.user.id,
       });
 
       return res.json({
