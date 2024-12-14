@@ -176,6 +176,27 @@ const Student = () => {
                       })}
                     </select>
                   </div>
+                  <div>
+                    <label
+                      className="text-gray-700 dark:text-gray-200"
+                      htmlFor="password"
+                    >
+                      Route
+                    </label>
+                    <input
+                      id="route"
+                      type="text"
+                      value={driverData.route}
+                      onChange={(e) =>
+                        setDriverData({
+                          ...driverData,
+                          route: e.target.value,
+                        })
+                      }
+                      className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+                    />
+                  </div>
+
                   <input
                     className="block w-full mb-5 text-xs text-gray-900 border rounded-lg cursor-pointer bg-gray-50"
                     name="image"
