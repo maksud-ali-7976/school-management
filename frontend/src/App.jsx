@@ -59,12 +59,24 @@ function App() {
               }
             />
           </Route>
-          <PublicRoute>
-            <Route path="/admin">
-              <Route path="login" element={<LoginPage />} />
-              <Route path="register" element={<Register />} />
-            </Route>
-          </PublicRoute>
+          <Route path="/admin">
+            <Route
+              path="login"
+              element={
+                <PublicRoute>
+                  <LoginPage />
+                </PublicRoute>
+              }
+            />
+            <Route
+              path="register"
+              element={
+                <PublicRoute>
+                  <Register />
+                </PublicRoute>
+              }
+            />
+          </Route>
           <Route path="*" element={<Notfound />} />
         </Routes>
       </div>
