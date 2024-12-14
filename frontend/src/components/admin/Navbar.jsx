@@ -9,7 +9,7 @@ const Navbar = () => {
     const response = await axios.post("http://localhost:5000/user/logout", {
       withCredentials: true,
     });
-    console.log(response.data)
+    console.log(response.data);
   };
   return (
     <div className="border">
@@ -111,12 +111,9 @@ const Navbar = () => {
                 <div>
                   <button
                     type="button"
-                    className="relative flex rounded-full bg-red-500 hover:bg-red-700 w-10 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                    id="user-menu-button"
-                    aria-expanded="false"
-                    aria-haspopup="true"
+                    class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                   >
-                   LogOut
+                    LogOut
                   </button>
                 </div>
 
