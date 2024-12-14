@@ -45,8 +45,8 @@ const Student = () => {
           withCredentials: true,
         }
       );
-      navigate("/driver", { replace: true });
-      return response.data;
+      return navigate("/driver", { replace: true });
+      // return response.data;
     } catch (error) {
       throw error;
     }

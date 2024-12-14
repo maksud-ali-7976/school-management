@@ -32,7 +32,7 @@ const DriverTable = ({ Data, columns }) => {
                 <td className="px-6 py-4">{el.vehicle}</td>
                 <td className="px-6 py-4">{el.salary}</td>
                 <td className="px-6 py-4">{el.route}</td>
-                <td className="px-6 py-4">{el.number}</td>
+                <td className="px-6 py-4">{el.mobile}</td>
                 <td>
                   <button className="w-[40%] bg-blue-500 h-5 text-black rounded-md">
                     Edit
