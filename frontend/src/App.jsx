@@ -9,7 +9,7 @@ import ProfilePage from "./pages/ProfilePage";
 import LoginPage from "./pages/auth/login";
 import Register from "./pages/auth/Signup";
 import ProtectedRoute from "./middleware/protected";
-
+import Dashboard from "./pages/Dashboard";
 function App() {
   return (
     <>
