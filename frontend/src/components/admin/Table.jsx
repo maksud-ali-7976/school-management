@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Data } from "../config/ClassData";
+import {Data} from '../config/data'
 const API_URL = import.meta.env.VITE_BACKEND_API;
 const Table = ({ Data, columns }) => {
   const navigate = useNavigate();
