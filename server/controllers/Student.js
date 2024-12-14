@@ -48,7 +48,7 @@ export async function HandlerForGettingAllStudents(req, res) {
       search = "",
       studentClass: studentClass,
     } = await req.query;
-    const id = req.user._id;
+
     const query = {};
 
     if (search) {
@@ -57,11 +57,8 @@ export async function HandlerForGettingAllStudents(req, res) {
     if (studentClass) {
       query.studentClass = studentClass;
     }
-    if (id) {
-      query.id = id;
-    }
 
-    const AllStudents = await Students.find(query)
+    const AllStudents = await Students.find({ addBy: req.user.id }, query)
       .skip((page - 1) * limit)
       .limit(limit);
     const total = await Students.countDocuments(query);
