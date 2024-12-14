@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {Data} from '../config/data'
+import {classData} from '../config/data'
 const API_URL = import.meta.env.VITE_BACKEND_API;
 const Table = ({ Data, columns }) => {
   const navigate = useNavigate();
@@ -167,7 +167,7 @@ const Table = ({ Data, columns }) => {
                       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     >
                       <option>Select Class</option>
-                      {Data.map((item, i) => {
+                      {classData.map((item, i) => {
                         return (
                           <option key={i} value={item.id}>
                             {item.name}

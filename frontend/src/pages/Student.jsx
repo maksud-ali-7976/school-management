@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Table from "../components/admin/Table";
 import { useDispatch, useSelector } from "react-redux";
 import { studentDataFetch } from "../toolkit/DataReducer";
-import { Data } from "../components/config/data";
+import { classData } from "../components/config/data";
 const Student = () => {
   const dispatch = useDispatch();
   const [page, setPage] = useState(1);
@@ -120,7 +120,7 @@ const Student = () => {
               className="py-3  md:w-[35vh] rounded-lg text-left p-2 hover:shadow-xl shadow-md border-spacing-2"
             >
               <option value="">All Classes</option>
-              {Data.map((item, i) => {
+              {classData.map((item, i) => {
                 return (
                   <option key={i} value={item.id}>
                     {item.name}
@@ -183,7 +183,7 @@ const Student = () => {
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   >
                     <option>Select Class</option>
-                    {Data.map((item, i) => {
+                    {classData.map((item, i) => {
                       return (
                         <option key={i} value={item.id}>
                           {item.name}

@@ -62,7 +62,7 @@ export const Vehicle = [
 
 
 
-export const Data = [
+export const classData = [
     {
         id:"ukg",
         name:"UKG"
