@@ -30,7 +30,9 @@ export async function HandlerForAllDriver(req, res) {
     if (route) {
       query.route = route;
     }
-    const allDriver = await Driver.find(query);
+    const allDriver = await Driver.find(query)
+      .skip((page - 1) * limit)
+      .limit(Number(limit));
     const total = await Driver.countDocuments(query);
     if (allDriver) {
       return res.status(200).json({

@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
 const StudentSchema = new mongoose.Schema(
   {
@@ -25,6 +25,10 @@ const StudentSchema = new mongoose.Schema(
     profile:{
         type:String
     },
+    addBy:{
+      type:Schema.Types.ObjectId,
+      ref:'user'
+    }
   },
   { timestamps: true }
 );

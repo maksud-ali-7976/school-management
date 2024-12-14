@@ -22,6 +22,7 @@ export async function HandlerForStudentAdmission(req, res) {
         address,
         phone,
         profile,
+        addBy: req.user._id,
       });
 
       return res.json({
