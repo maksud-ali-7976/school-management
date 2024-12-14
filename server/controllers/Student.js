@@ -12,7 +12,7 @@ export async function HandlerForStudentAdmission(req, res) {
       phone,
     } = JSON.parse(req.body.data);
     const Student = await Students.findOne({ studentName });
-
+    console.log(req.user);
     if (Student === null) {
       const student = await Students.create({
         studentName,
@@ -58,8 +58,8 @@ export async function HandlerForGettingAllStudents(req, res) {
     if (studentClass) {
       query.studentClass = studentClass;
     }
-    if(id){
-      query.id = id
+    if (id) {
+      query.id = id;
     }
 
     const AllStudents = await Students.find(query)
