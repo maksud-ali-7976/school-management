@@ -22,7 +22,7 @@ const Table = ({ Data, columns }) => {
       }
     );
     navigate("/students", { replace: true });
-    window.location.reload();
+    return response.data;
   };
   const editHandler = async (id) => {
     const response = await axios.get(`${API_URL}student/student/${id}`, {
@@ -41,7 +41,7 @@ const Table = ({ Data, columns }) => {
       }
     );
     navigate("/students", { replace: true });
-    window.location.reload();
+    return response.data;
   };
   return (
     <>
