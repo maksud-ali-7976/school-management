@@ -27,7 +27,7 @@ const Student = () => {
     mobile: "",
   });
   const [image, setImage] = useState("");
-  const studentAddHandler = async (e) => {
+  const driverAddHandler = async (e) => {
     e.preventDefault();
     try {
       const formData = new FormData();
@@ -82,7 +82,7 @@ const Student = () => {
               <h2 className="text-lg font-semibold  text-gray-700 capitalize dark:text-white">
                 Drivers Form
               </h2>
-              <form encType="multipart/form-data" onSubmit={studentAddHandler}>
+              <form encType="multipart/form-data" onSubmit={driverAddHandler}>
                 <div className="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
                   <div>
                     <label
