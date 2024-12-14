@@ -115,46 +115,6 @@ const Navbar = () => {
                     LogOut
                   </button>
                 </div>
-
-                {UserMenuTOggle && (
-                  <>
-                    <div
-                      className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black/5 focus:outline-none"
-                      role="menu"
-                      aria-orientation="vertical"
-                      aria-labelledby="user-menu-button"
-                      tabIndex={-1}
-                    >
-                      {/* Active: "bg-gray-100 outline-none", Not Active: "" */}
-                      <a
-                        href="#"
-                        className="block px-4 py-2 text-sm text-gray-700"
-                        role="menuitem"
-                        tabIndex={-1}
-                        id="user-menu-item-0"
-                      >
-                        Your Profile
-                      </a>
-                      <a
-                        href="#"
-                        className="block px-4 py-2 text-sm text-gray-700"
-                        role="menuitem"
-                        tabIndex={-1}
-                        id="user-menu-item-1"
-                      >
-                        Settings
-                      </a>
-                      <button
-                        className="block px-4 py-2 text-sm text-gray-700"
-                        role="menuitem"
-                        tabIndex={-1}
-                        onClick={(e) => logoutHandler()}
-                      >
-                        Sign out
-                      </button>
-                    </div>
-                  </>
-                )}
               </div>
             </div>
           </div>
@@ -163,7 +123,7 @@ const Navbar = () => {
         <div className="sm:hidden" id="mobile-menu">
           <div className="space-y-1 px-2 pb-3 pt-2">
             {/* Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" */}
-            <a
+            <a 
               href="#"
               className="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white"
               aria-current="page"
