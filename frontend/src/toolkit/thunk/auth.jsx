@@ -22,18 +22,28 @@ export const CheckAuth = createAsyncThunk(
     }
   }
 );
+export const logOutThunk = createAsyncThunk(
+  "auth/logout",
+  async (_, thunkAPI) => {
+    try {
+      const response = await axios.post(`${API_URL}user/logout`, {
+        withCredentials: true,
+      });
+      thunkAPI.dispatch(ClearLogin());
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  }
+);
 
 export const LoginThunk = createAsyncThunk(
   "auth/login",
   async (loginInfo, thunkAPI) => {
     try {
-      const response = await axios.post(
-        `${API_URL}user/login`,
-        loginInfo,
-        {
-          withCredentials: true,
-        }
-      );
+      const response = await axios.post(`${API_URL}user/login`, loginInfo, {
+        withCredentials: true,
+      });
       thunkAPI.dispatch(setAuth(response.data.user));
       return response.data;
     } catch (error) {

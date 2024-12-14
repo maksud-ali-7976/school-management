@@ -1,15 +1,13 @@
-import React, { useState } from "react";
-import { AiFillProfile } from "react-icons/ai";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import React from "react";
+import { useDispatch } from "react-redux";
+import { logOutThunk } from "../../toolkit/thunk/auth";
+import { Navigate } from "react-router-dom";
 const Navbar = () => {
-  const [UserMenuTOggle, setUserToggleMenu] = useState(false);
-  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const logoutHandler = async () => {
-    const response = await axios.post("http://localhost:5000/user/logout", {
-      withCredentials: true,
-    });
-    console.log(response.data);
+    dispatch(logOutThunk());
+    return <Navigate to="/admin" replace />;
   };
   return (
     <div className="border">
@@ -111,6 +109,7 @@ const Navbar = () => {
                 <div>
                   <button
                     type="button"
+                    onClick={logoutHandler}
                     class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                   >
                     LogOut
