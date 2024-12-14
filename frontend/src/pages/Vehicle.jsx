@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { driversFetch } from "../toolkit/DataReducer";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import {Vehicle} from '../components/config/data'
+import { Vehicle } from "../components/config/data";
 const API_URL = import.meta.env.VITE_BACKEND_API;
 const Student = () => {
   const [driverToggle, setDriverToggle] = useState(false);
@@ -39,6 +39,8 @@ const Student = () => {
         {
           headers: {
             "Content-Type": "multipart/form-data",
+            "Access-Control-Allow-Origin":
+              "https://school-management-beryl-zeta.vercel.app",
           },
           withCredentials: true,
         }
