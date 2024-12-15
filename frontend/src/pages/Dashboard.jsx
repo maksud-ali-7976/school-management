@@ -18,7 +18,9 @@ function Dashboard() {
           <h1 className="font-semibold font-serif text-center">
             Total Teachers
           </h1>
-          <span className="text-3xl font-semibold">{teachers.length()}</span>
+          <span className="text-3xl font-semibold">
+            {teachers && teachers.length()}
+          </span>
         </div>
 
         {/* Card 2 */}
@@ -26,7 +28,9 @@ function Dashboard() {
           <h1 className="font-semibold font-serif text-center">
             Total Students
           </h1>
-          <span className="text-3xl font-semibold">{students.length()}</span>
+          <span className="text-3xl font-semibold">
+            {students && students.length()}
+          </span>
         </div>
 
         {/* Card 3 */}
@@ -34,7 +38,9 @@ function Dashboard() {
           <h1 className="font-semibold font-serif text-center">
             Total Drivers
           </h1>
-          <span className="text-3xl font-semibold">{drivers.length()}</span>
+          <span className="text-3xl font-semibold">
+            {drivers && drivers.length()}
+          </span>
         </div>
 
         {/* Card 4 */}
