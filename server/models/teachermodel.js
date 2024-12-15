@@ -25,13 +25,15 @@ const teacherSchema = new Schema(
     subject: {
       type: String,
     },
-    profile:{
-      type:String
-    }
+    profile: {
+      type: String,
+    },
+    createBy: {
+      type: Schema.Types.ObjectId,
+      ref: "user",
+    },
   },
   { timestamps: true }
 );
 
-
- export const Teacher = model('teacher',teacherSchema);
-
+export const Teacher = model("teacher", teacherSchema);

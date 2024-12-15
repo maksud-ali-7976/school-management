@@ -1,4 +1,4 @@
-import mongoose, { mongo } from "mongoose";
+import mongoose, { mongo, Schema } from "mongoose";
 const driverSchema = new mongoose.Schema(
   {
     name: {
@@ -22,6 +22,10 @@ const driverSchema = new mongoose.Schema(
     },
     profile: {
       type: String,
+    },
+    createBy: {
+      type: Schema.Types.ObjectId,
+      ref: "user",
     },
   },
   { timestamps: true }

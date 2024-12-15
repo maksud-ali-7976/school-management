@@ -32,7 +32,7 @@ export const teachersData = createAsyncThunk(
 
 export const driversFetch = createAsyncThunk(
   "data/driversFetch",
-  async ({ page, limit, search, route }) => {
+  async ({ page, limit, search, route:route }) => {
     const response = await axios.get(
       `${API_URL}driver/all-driver?page=${page}&limit=${limit}&search=${search}&route=${route}`,
       {

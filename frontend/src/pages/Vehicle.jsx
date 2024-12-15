@@ -18,7 +18,7 @@ const Student = () => {
   const [search, setSearch] = useState("");
 
   useEffect(() => {
-    dispatch(driversFetch({ page, limit, search, route }));
+    dispatch(driversFetch({ page, limit, search, route: route }));
   }, [dispatch, page, limit, search]);
   const [driverData, setDriverData] = useState({
     name: "",
@@ -86,11 +86,40 @@ const Student = () => {
           <input
             type="text"
             placeholder="Search Here"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
             className="py-3 w-full md:w-[35vh] rounded-lg text-left p-2 hover:shadow-xl shadow-md border-spacing-2"
           />
           <button className="bg-green-500 hover:cursor-pointer hover:shadow-md rounded-xl font-semibold text-base md:text-xl w-full md:w-[25vh]">
             Search
           </button>
+          <div className="flex flex-col md:flex-row gap-4 mt-2">
+            <select
+              value={route}
+              onChange={(e) => {
+                setRoute(e.target.value);
+                setPage(1);
+                dispatch(
+                  driversFetch({
+                    page: 1,
+                    limit,
+                    search,
+                    route: e.target.value,
+                  })
+                );
+              }}
+              className="py-3  md:w-[35vh] rounded-lg text-left p-2 hover:shadow-xl shadow-md border-spacing-2"
+            >
+              <option value="">All Classes</option>
+              {Subject.map((item, i) => {
+                return (
+                  <option key={i} value={item.id}>
+                    {item.name}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
         </div>
 
         {driverToggle && (

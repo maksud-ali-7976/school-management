@@ -11,6 +11,7 @@ export async function HandlerForAddDriver(req, res) {
       vehicle,
       mobile,
       profile,
+      createBy: req.user.id,
     });
     return res
       .status(200)
@@ -30,7 +31,7 @@ export async function HandlerForAllDriver(req, res) {
     if (route) {
       query.route = route;
     }
-    const allDriver = await Driver.find(query)
+    const allDriver = await Driver.find({ createBy: req.user.id }, query)
       .skip((page - 1) * limit)
       .limit(Number(limit));
     const total = await Driver.countDocuments(query);
@@ -79,9 +80,15 @@ export async function HandlerForFindParticularDriver(req, res) {
 export async function HandlerForDriverUpdate(req, res) {
   try {
     const { id } = req.params;
-    const { name, salary, route, vehicle } = req.body;
+    const { name, salary, route, vehicle, mobile } = req.body;
     await Driver.findByIdAndUpdate(id, {
-      $set: { name: name, route: route, salary: salary, vehicle: vehicle },
+      $set: {
+        name: name,
+        route: route,
+        salary: salary,
+        vehicle: vehicle,
+        mobile: mobile,
+      },
     });
     return res
       .status(200)

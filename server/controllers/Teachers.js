@@ -15,6 +15,7 @@ export async function HandlerForTeacherAdd(req, res) {
         subject,
         address,
         profile,
+        createBy: req.user.id,
       });
       return res
         .status(200)
@@ -37,7 +38,7 @@ export async function HandlerForGettingAllTeacher(req, res) {
     if (subject) {
       query.subject = subject;
     }
-    const allTeacher = await Teacher.find(query)
+    const allTeacher = await Teacher.find({ createBy: req.user.id }, query)
       .skip((page - 1) * limit)
       .limit(limit);
     const total = await Teacher.countDocuments(query);
