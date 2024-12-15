@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { teachersData } from "../toolkit/DataReducer";
 import { useDispatch, useSelector } from "react-redux";
-import {Subject} from '../components/config/data'
+import { Subject } from "../components/config/data";
 const API_URL = import.meta.env.VITE_BACKEND_API;
 function Teachers() {
   const navigate = useNavigate();
@@ -121,7 +121,7 @@ function Teachers() {
               }}
               className="py-3  md:w-[35vh] rounded-lg text-left p-2 hover:shadow-xl shadow-md border-spacing-2"
             >
-              <option value="">All Classes</option>
+              <option value="">All Subject</option>
               {Subject.map((item, i) => {
                 return (
                   <option key={i} value={item.id}>
