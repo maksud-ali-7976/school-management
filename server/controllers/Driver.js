@@ -24,14 +24,14 @@ export async function HandlerForAddDriver(req, res) {
 export async function HandlerForAllDriver(req, res) {
   try {
     const { page = 1, limit = 10, search = "", route: route } = req.query;
-    const query = {};
+    const query = { createBy: req.user.id };
     if (search) {
       query.name = { $regex: search, $options: "i" };
     }
     if (route) {
       query.route = route;
     }
-    const allDriver = await Driver.find({ createBy: req.user.id }, query)
+    const allDriver = await Driver.find(query)
       .skip((page - 1) * limit)
       .limit(Number(limit));
     const total = await Driver.countDocuments(query);
