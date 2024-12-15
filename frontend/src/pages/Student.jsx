@@ -82,7 +82,7 @@ const Student = () => {
     <>
       <div className="w-full p-4">
         <h1 className="text-start font-semibold font-mono text-lg md:text-2xl">
-          Dashboard Teacher
+          Dashboard Student
         </h1>
 
         <div className="flex flex-col items-end mb-4">
