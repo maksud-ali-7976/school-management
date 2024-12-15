@@ -18,7 +18,7 @@ const Student = () => {
 
   useEffect(() => {
     dispatch(driversFetch({ page, limit, search, route: route }));
-  }, [dispatch, page, limit, search]);
+  }, [dispatch, page, limit, search,route]);
   const [driverData, setDriverData] = useState({
     name: "",
     salary: "",
