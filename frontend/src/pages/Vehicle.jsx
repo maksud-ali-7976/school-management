@@ -111,7 +111,7 @@ const Student = () => {
               className="py-3  md:w-[35vh] rounded-lg text-left p-2 hover:shadow-xl shadow-md border-spacing-2"
             >
               <option value="">All Classes</option>
-              {Subject.map((item, i) => {
+              {Vehicle.map((item, i) => {
                 return (
                   <option key={i} value={item.id}>
                     {item.name}
