@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import TeacherTable from "../components/admin/TeacherTable";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { teachersData } from "../toolkit/DataReducer";
 import { useDispatch, useSelector } from "react-redux";
@@ -44,7 +44,9 @@ function Teachers() {
           withCredentials: true,
         }
       );
-      navigate("/teachers", { replace: true });
+      <Navigate to="/teachers" replace />;
+      setTeacherToggle(false);
+      return response.data;
     } catch (error) {
       throw error;
     }

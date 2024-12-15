@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import Table from "../components/admin/Table";
 import { useDispatch, useSelector } from "react-redux";
 import { studentDataFetch } from "../toolkit/DataReducer";
@@ -10,14 +10,13 @@ const Student = () => {
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
   const [selectedClass, setSelectedClass] = useState("");
-  const limit = 2;
+  const limit = 10;
   useEffect(() => {
     dispatch(
-      studentDataFetch({ page, limit, search, studentClass:selectedClass })
+      studentDataFetch({ page, limit, search, studentClass: selectedClass })
     );
   }, [dispatch, page]);
   const API_URL = import.meta.env.VITE_BACKEND_API;
-  const navigate = useNavigate();
   const formData = new FormData();
   const students = useSelector((state) => state.data.students);
   const totalPage = useSelector((state) => state.data.totalStudentPage);
@@ -48,7 +47,7 @@ const Student = () => {
         withCredentials: true, // Include cookies
       }
     );
-    navigate("/students", { replace: true });
+    <Navigate to="/students" replace />;
     setStudentToggle(false);
     return response.data;
   };
@@ -56,7 +55,14 @@ const Student = () => {
     e.preventDefault();
     try {
       setPage(1);
-      dispatch(studentDataFetch({ page: 1, limit, search,studentClass:selectedClass }));
+      dispatch(
+        studentDataFetch({
+          page: 1,
+          limit,
+          search,
+          studentClass: selectedClass,
+        })
+      );
     } catch (error) {
       throw error;
     }

@@ -2,13 +2,12 @@ import React, { useEffect, useState } from "react";
 import DriverTable from "../components/admin/DriverTable";
 import { useDispatch, useSelector } from "react-redux";
 import { driversFetch } from "../toolkit/DataReducer";
-import { useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import axios from "axios";
 import { Vehicle } from "../components/config/data";
 const API_URL = import.meta.env.VITE_BACKEND_API;
 const Student = () => {
   const [driverToggle, setDriverToggle] = useState(false);
-  const navigate = useNavigate();
   const drivers = useSelector((state) => state.data.drivers);
   const totalPage = useSelector((state) => state.data.totalDriverPage);
   const dispatch = useDispatch();
@@ -46,8 +45,9 @@ const Student = () => {
           withCredentials: true,
         }
       );
-      return navigate("/driver", { replace: true });
-      // return response.data;
+      <Navigate to="/driver" replace />;
+      setDriverToggle(false)
+      return response.data;
     } catch (error) {
       throw error;
     }
