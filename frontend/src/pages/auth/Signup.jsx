@@ -103,7 +103,7 @@ const Register = () => {
                       aria-label="Show password"
                     ></button>
                   </div>
-                  <Link className="text-sky-400 hover:text-sky-800"  to="/admin/login" >Do'nt Have a Account ? Signup</Link>
+                  <Link className="text-sky-400 hover:text-sky-800"  to="/admin/login" >Already Have a Account ? Login</Link>
                 </div>
                 <button
                   className="w-full bg-blue-700 text-gray-50 rounded-md shadow-sm px-3 py-2 my-4 hover:bg-blue-600"
