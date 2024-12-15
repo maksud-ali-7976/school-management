@@ -19,7 +19,7 @@ function Dashboard() {
             Total Teachers
           </h1>
           <span className="text-3xl font-semibold">
-            {teachers && teachers.length()}
+            {teachers && teachers.length}
           </span>
         </div>
 
@@ -29,7 +29,7 @@ function Dashboard() {
             Total Students
           </h1>
           <span className="text-3xl font-semibold">
-            {students && students.length()}
+            {students && students.length}
           </span>
         </div>
 
@@ -39,7 +39,7 @@ function Dashboard() {
             Total Drivers
           </h1>
           <span className="text-3xl font-semibold">
-            {drivers && drivers.length()}
+            {drivers && drivers.length}
           </span>
         </div>
 
