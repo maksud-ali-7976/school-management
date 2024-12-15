@@ -80,25 +80,7 @@ const Register = () => {
                     ></button>
                   </div>
                 </div>
-                <div className="form-group">
-                  <label className="block my-2" htmlFor="password">
-                    Password
-                  </label>
-                  <div className="relative">
-                    <input
-                      className="w-full border-2 rounded-md px-3 py-2 my-1 shadow-sm"
-                      type="file"
-                      id="password"
-                      name="password"
-                      required=""
-                    />
-                    <button
-                      type="button"
-                      className="absolute right-2.5 top-1/2 -translate-y-1/2 text-neutral-600 dark:text-neutral-300"
-                      aria-label="Show password"
-                    ></button>
-                  </div>
-                </div>
+
                 <div className="form-group">
                   <label className="block my-2" htmlFor="password">
                     Password
@@ -121,6 +103,7 @@ const Register = () => {
                       aria-label="Show password"
                     ></button>
                   </div>
+                  <Link className="text-sky-400 hover:text-sky-800"  to="/admin/login" >Do'nt Have a Account ? Signup</Link>
                 </div>
                 <button
                   className="w-full bg-blue-700 text-gray-50 rounded-md shadow-sm px-3 py-2 my-4 hover:bg-blue-600"

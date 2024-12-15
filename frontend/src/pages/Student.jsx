@@ -162,7 +162,7 @@ const Student = () => {
                   <input
                     type="text"
                     className="bg-gray-100 w-full my-2 rounded-md p-2"
-                    placeholder="Enter Address"
+                    placeholder="Enter Father Name"
                     value={StudentData.studentFather}
                     onChange={(e) =>
                       setStudentData({
@@ -178,7 +178,7 @@ const Student = () => {
                     Select Class
                   </label>
                   <select
-                    id="countries"
+                    id="class"
                     value={StudentData.studentClass}
                     onChange={(e) =>
                       setStudentData({
@@ -201,7 +201,7 @@ const Student = () => {
                   <input
                     type="text"
                     className="bg-gray-100 w-full my-2 rounded-md p-2"
-                    placeholder="Enter Phone"
+                    placeholder="Enter Phone number"
                     value={StudentData.phone}
                     onChange={(e) =>
                       setStudentData({ ...StudentData, phone: e.target.value })
@@ -211,7 +211,7 @@ const Student = () => {
                   <input
                     type="text"
                     className="bg-gray-100 w-full my-2 rounded-md p-2"
-                    placeholder="Enter Salary"
+                    placeholder="Enter Fees"
                     value={StudentData.totalFess}
                     onChange={(e) =>
                       setStudentData({
@@ -224,7 +224,7 @@ const Student = () => {
                   <input
                     type="text"
                     className="bg-gray-100 w-full my-2 rounded-md p-2"
-                    placeholder="Enter Phone"
+                    placeholder="Enter students Address"
                     value={StudentData.address}
                     onChange={(e) =>
                       setStudentData({
