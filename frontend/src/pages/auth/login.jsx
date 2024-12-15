@@ -2,27 +2,33 @@ import React, { useState } from "react";
 
 import { LoginThunk } from "../../toolkit/thunk/auth";
 import { useDispatch } from "react-redux";
-import {useNavigate} from 'react-router-dom'
+import { Navigate,Link } from "react-router-dom";
 
 const LoginPage = () => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [loginInfo, setLoginInfo] = useState({ email: "", password: "" });
 
   const LoginHandler = async (e) => {
-    e.preventDefault();
-    if (loginInfo.email == "" && loginInfo.password == "") {
-      alert("All Field Required");
-    }
+    try {
+      e.preventDefault();
+      if (loginInfo.email == "" && loginInfo.password == "") {
+        alert("All Field Required");
+      }
 
-    dispatch(LoginThunk(loginInfo));
-    navigate('/')
+      dispatch(LoginThunk(loginInfo));
+      <Navigate to="/" replace />;
+    } catch (error) {
+      throw error;
+    }
   };
   return (
     <>
       <main>
         <div className="flex items-center h-screen px-2 sm:px-0">
-          <form className="bg-gray-100 w-full max-w-sm sm:max-w-xl mx-auto p-4 rounded-xl shadow-md" onSubmit={LoginHandler}>
+          <form
+            className="bg-gray-100 w-full max-w-sm sm:max-w-xl mx-auto p-4 rounded-xl shadow-md"
+            onSubmit={LoginHandler}
+          >
             <div className="px-4 m-4 text-center">
               <h2 className="text-xl font-bold">Login to your account</h2>
             </div>
@@ -103,6 +109,7 @@ const LoginPage = () => {
                       </svg>
                     </button>
                   </div>
+                  <Link className="text-sky-400 hover:text-sky-800"  to="/admin/register" >Do'nt Have a Account ? Signup</Link>
                 </div>
                 <button
                   className="w-full bg-blue-700 text-gray-50 rounded-md shadow-sm px-3 py-2 my-4 hover:bg-blue-600"

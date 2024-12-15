@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { replace, useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 const TeacherTable = ({ Data, columns }) => {
   const API_URL = import.meta.env.VITE_BACKEND_API;
-  const navigate = useNavigate();
   const [editToggle, setEditToggle] = useState(false);
   const [editTeacherData, setEditTeachersData] = useState({
     teacherName: "",
@@ -18,8 +17,7 @@ const TeacherTable = ({ Data, columns }) => {
       `${API_URL}teacher/teacher-delete/${id}`,
       { withCredentials: true }
     );
-    navigate("/teachers", { replace: true });
-    window.location.reload();
+    <Navigate to="/teachers" replace />;
     return response.data;
   };
   const editHandler = async (id) => {
@@ -39,8 +37,7 @@ const TeacherTable = ({ Data, columns }) => {
           withCredentials: true,
         }
       );
-     navigate('/teachers',{replace:true})
-     window.location.reload()
+      return <Navigate to="/teachers" replace />;
     } catch (error) {
       throw error;
     }

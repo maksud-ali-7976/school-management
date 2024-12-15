@@ -10,6 +10,7 @@ const Student = () => {
   const [driverToggle, setDriverToggle] = useState(false);
   const navigate = useNavigate();
   const drivers = useSelector((state) => state.data.drivers);
+  const totalPage = useSelector((state) => state.data.totalDriverPage);
   const dispatch = useDispatch();
   const [page, setPage] = useState(1);
   const limit = 5;
@@ -49,6 +50,20 @@ const Student = () => {
       // return response.data;
     } catch (error) {
       throw error;
+    }
+  };
+  const prevPage = async () => {
+    try {
+      if (page > 1) {
+        setPage(page - 1);
+      }
+    } catch (error) {
+      throw error;
+    }
+  };
+  const nextPage = async () => {
+    if (page < totalPage) {
+      setPage(page + 1);
     }
   };
   return (
@@ -231,6 +246,27 @@ const Student = () => {
               { key: "action", label: "Actions" },
             ]}
           />
+        </div>
+        <div className="flex items-center justify-between py-6">
+          <button
+            className="text-gray-600 hover:text-indigo-700"
+            onClick={() => prevPage()}
+          >
+            Previous
+          </button>
+          <div className="flex space-x-2">
+            {Array.from({ length: totalPage }, (_, index) => (
+              <span key={index + 1} className="page-number">
+                {index + 1}
+              </span>
+            ))}
+          </div>
+          <button
+            className="text-gray-600 hover:text-indigo-700"
+            onClick={() => nextPage()}
+          >
+            Next
+          </button>
         </div>
       </div>
     </>
